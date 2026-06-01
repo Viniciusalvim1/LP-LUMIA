@@ -3,13 +3,32 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Starfield from "./Starfield";
+import { getSupabase } from "@/lib/supabase";
 
 export default function CTAFinalSection() {
   const [form, setForm] = useState({ nome: "", sobrenome: "", email: "", telefone: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setSending(true);
+    setError(null);
+
+    const { error } = await getSupabase().from("leads").insert({
+      nome: form.nome,
+      sobrenome: form.sobrenome || null,
+      email: form.email,
+      telefone: form.telefone || null,
+      origem: "cta-final",
+    });
+
+    setSending(false);
+    if (error) {
+      setError("Não foi possível enviar. Tente novamente.");
+      return;
+    }
     setSubmitted(true);
   }
 
@@ -140,11 +159,17 @@ export default function CTAFinalSection() {
                   />
                   <button
                     type="submit"
-                    className="btn-primary text-[16px] font-semibold py-4 mt-1 w-full"
+                    disabled={sending}
+                    className="btn-primary text-[16px] font-semibold py-4 mt-1 w-full disabled:opacity-60 disabled:cursor-not-allowed"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
-                    Agendar Demonstração
+                    {sending ? "Enviando..." : "Agendar Demonstração"}
                   </button>
+                  {error && (
+                    <p className="text-center text-red-500 text-[13px]" style={{ fontFamily: "var(--font-display)" }}>
+                      {error}
+                    </p>
+                  )}
                   <p className="text-center text-[#69727D] text-[12px]" style={{ fontFamily: "var(--font-display)" }}>
                     Gratuito. Sem compromisso.
                   </p>

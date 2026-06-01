@@ -266,12 +266,12 @@ export default function Hero() {
         className="hidden lg:block absolute z-20 pointer-events-none"
         style={{
           right: 0,
-          top: "88px",
-          bottom: "56px",
+          top: "50%",
+          height: "min(440px, 62vh)",
           width: "min(620px, 46vw)",
         }}
-        initial={{ opacity: 0, x: 60 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, x: 60, y: "-50%" }}
+        animate={{ opacity: 1, x: 0, y: "-50%" }}
         transition={{ delay: 0.4, duration: 0.9, ease: "easeOut" } as Transition}
       >
         {/* Frame — só canto superior esquerdo arredondado; bottom e right clipam pela section */}

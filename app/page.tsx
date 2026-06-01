@@ -8,6 +8,7 @@ import MetricsSection from "@/components/MetricsSection";
 import OnboardingSection from "@/components/OnboardingSection";
 import PainSection from "@/components/PainSection";
 import BlogSection from "@/components/BlogSection";
+import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CTAFinalSection from "@/components/CTAFinalSection";
 import FAQSection from "@/components/FAQSection";
@@ -42,6 +43,7 @@ export default async function Home() {
 
       <div data-navbar-theme="light"><PainSection /></div>
       <div data-navbar-theme="light"><TestimonialsSection /></div>
+      <div data-navbar-theme="dark"><PricingSection /></div>
       <div data-navbar-theme="light"><BlogSection posts={posts} /></div>
       <div data-navbar-theme="dark"><CTAFinalSection /></div>
       <div data-navbar-theme="light"><FAQSection /></div>

@@ -7,7 +7,7 @@ import Image from "next/image";
 const links = [
   { label: "Funcionalidades", href: "/funcionalidades" },
   { label: "Sobre Nós", href: "/#sobre" },
-  { label: "Planos", href: "/#cta" },
+  { label: "Planos", href: "/#planos" },
 ];
 
 // Posição vertical onde medimos — fundo do pill (~68px do topo da viewport)
