@@ -2,33 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const faqs = [
-  {
-    q: "O Lumia é indicado para qualquer tipo de clínica de estética?",
-    a: "Sim. O Lumia foi desenvolvido para atender clínicas de estética de todos os portes — desde profissionais autônomos até redes com múltiplas unidades. Cada módulo pode ser configurado conforme a necessidade do seu negócio.",
-  },
-  {
-    q: "Preciso migrar meus dados atuais para começar a usar?",
-    a: "Não é obrigatório, mas nossa equipe oferece suporte completo para importação dos seus contatos, histórico de agendamentos e dados financeiros. O processo é simples e feito junto com um especialista.",
-  },
-  {
-    q: "Quanto tempo leva para minha clínica estar 100% operando no Lumia?",
-    a: "A maioria das clínicas está operando totalmente em menos de 48 horas. Oferecemos onboarding guiado com um especialista que configura tudo junto com você.",
-  },
-  {
-    q: "O Lumia se integra com WhatsApp?",
-    a: "Sim. O Lumia possui integração nativa com WhatsApp para confirmações automáticas de agendamento, régua de comunicação com pacientes e campanhas de marketing segmentadas.",
-  },
-  {
-    q: "Há fidelidade contratual ou posso cancelar quando quiser?",
-    a: "Não há fidelidade. Você pode cancelar a qualquer momento sem multa. Nosso compromisso é manter você conosco pela qualidade do serviço, não por contrato.",
-  },
-  {
-    q: "Existe suporte disponível após a contratação?",
-    a: "Sim. Oferecemos suporte via chat e WhatsApp em horário comercial, com tempo médio de resposta de 4 minutos. Para planos superiores, suporte prioritário 24/7 está disponível.",
-  },
-];
+import { faqs } from "@/content/faq";
 
 function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
   return (
