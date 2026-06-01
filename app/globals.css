@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ── Lumia Design Tokens ─────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Core palette */
+  --color-lumia-primary:   #183A51;
+  --color-lumia-secondary: #4CB794;
+  --color-lumia-accent:    #1673A3;
+  --color-lumia-dark:      #183A51;
+  --color-lumia-light:     #F7F7F7;
+
+  /* Text */
+  --color-lumia-text:      #1D1D1D;
+  --color-lumia-heading:   #183A51;
+  --color-lumia-muted:     #69727D;
+  --color-lumia-placeholder: #C3C4C7;
+
+  /* Fonts */
+  --font-display: var(--font-montserrat), "Montserrat", sans-serif;
+  --font-body:    var(--font-questrial), "Questrial", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --primary:    #183A51;
+  --secondary:  #4CB794;
+  --accent:     #1673A3;
+  --background: #FFFFFF;
+  --bg-light:   #F7F7F7;
+  --bg-dark:    #183A51;
+  --text:       #1D1D1D;
+  --text-on-dark: #FFFFFF;
+  --text-heading: #183A51;
+  --text-muted: #69727D;
+  --border-input: #69727D;
+  --border-tab:   #4CB794;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Shooting star along offset-path ────────────────────────── */
+@keyframes star-along-path {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  88%  { opacity: 0.85; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* ── Starfield animations ────────────────────────────────────── */
+@keyframes twinkle-dim {
+  0%, 100% { opacity: 0.10; }
+  50%       { opacity: 0.38; }
+}
+
+@keyframes twinkle-mid {
+  0%, 100% { opacity: 0.28; }
+  50%       { opacity: 0.72; }
+}
+
+@keyframes twinkle-bright {
+  0%, 100% { opacity: 0.50; }
+  30%       { opacity: 1;    }
+  70%       { opacity: 0.18; }
+}
+
+@keyframes twinkle-flash {
+  0%, 78%, 100% { opacity: 0.12; }
+  84%           { opacity: 1;    }
+  90%           { opacity: 0.45; }
+}
+
+/* ── Headline gradient animation ────────────────────────────── */
+@keyframes gradientSlide {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.headline-highlight {
+  background: linear-gradient(90deg, #3bbf97 0%, #6ef5d0 45%, #2ea882 80%, #5de8be 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientSlide 2.8s linear infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  background: #4CB794;
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 0.9s step-end infinite;
+}
+
+/* ── Utility classes ─────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.gradient-text {
+  background: linear-gradient(135deg, #4CB794, #1673A3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-badge {
+  background-color: #1673A3;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #4CB794;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #3da882;
+}
+
+.form-input {
+  background-color: #ffffff;
+  border: 1px solid #69727D;
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #1D1D1D;
+  width: 100%;
+  outline: none;
+  transition: outline 0.15s ease;
+}
+
+.form-input::placeholder {
+  color: #C3C4C7;
+}
+
+.form-input:focus {
+  outline: 2px solid #183A51;
+  outline-offset: -1px;
 }
