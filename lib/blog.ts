@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import { getSupabase } from "./supabase";
 
 // ─────────────────────────────────────────────────────────────
 // Blog Lumia — leitura dos posts publicados no Supabase
@@ -62,7 +62,7 @@ function mapRow(row: PostRow): BlogPost {
 
 /** Posts publicados, mais recentes primeiro. `limit` opcional. */
 export async function getPosts(limit?: number): Promise<BlogPost[]> {
-  let query = supabase
+  let query = getSupabase()
     .from("posts")
     .select("slug, title, excerpt, category, read_minutes, published_at, cover_url, author_name")
     .eq("status", "published")
@@ -84,7 +84,7 @@ export interface BlogPostFull extends BlogPost {
 
 /** Post único (publicado) por slug, com o corpo (content). */
 export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("posts")
     .select("slug, title, excerpt, content, category, read_minutes, published_at, cover_url, author_name")
     .eq("status", "published")
@@ -98,7 +98,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
 
 /** Slugs de todos os posts publicados — para generateStaticParams. */
 export async function getAllSlugs(): Promise<string[]> {
-  const { data } = await supabase
+  const { data } = await getSupabase()
     .from("posts")
     .select("slug")
     .eq("status", "published");
