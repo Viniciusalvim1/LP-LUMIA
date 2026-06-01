@@ -56,7 +56,9 @@ export default function Footer() {
             {/* Social icons */}
             <div className="flex items-center gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/lumiaclin?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-[#4CB794] hover:text-[#4CB794] transition-colors duration-200 cursor-pointer"
                 aria-label="Instagram"
               >
@@ -67,7 +69,9 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/lumiaclin/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-[#4CB794] hover:text-[#4CB794] transition-colors duration-200 cursor-pointer"
                 aria-label="LinkedIn"
               >

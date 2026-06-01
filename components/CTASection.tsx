@@ -32,11 +32,11 @@ export default function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button href="https://lumiacrm.com.br" size="lg">
+            <Button href="https://app.lumiaclin.com.br/#login" size="lg">
               Experimente grátis
             </Button>
-            <Button href="https://lumiacrm.com.br/demo" variant="ghost" size="lg">
-              Agendar demonstração
+            <Button href="https://api.whatsapp.com/send/?phone=5531995671853&text=Quero%20saber%20mais%20sobre%20o%20sistema%20lumia&type=phone_number&app_absent=0" variant="ghost" size="lg">
+              Falar no WhatsApp
             </Button>
           </div>
 
