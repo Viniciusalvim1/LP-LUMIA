@@ -51,10 +51,7 @@ export default async function BlogPostPage({
   const all = await getPosts(6);
   const related = all.filter((p) => p.slug !== post.slug).slice(0, 2);
 
-  const paragraphs = (post.content ?? "")
-    .split(/\n{2,}/)
-    .map((p) => p.trim())
-    .filter(Boolean);
+  const hasContent = !!post.content?.trim();
 
   return (
     <>
@@ -134,18 +131,11 @@ export default async function BlogPostPage({
               {post.excerpt}
             </p>
 
-            {paragraphs.length > 0 ? (
-              <div className="flex flex-col gap-5">
-                {paragraphs.map((p, i) => (
-                  <p
-                    key={i}
-                    className="text-[17px] leading-[1.8] text-[#3a4754]"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {p}
-                  </p>
-                ))}
-              </div>
+            {hasContent ? (
+              <div
+                className="blog-prose"
+                dangerouslySetInnerHTML={{ __html: post.content! }}
+              />
             ) : (
               <div className="rounded-xl bg-[#F7F7F7] border border-gray-100 p-8 text-center">
                 <p className="text-[15px] text-[#69727D]" style={{ fontFamily: "var(--font-display)" }}>
