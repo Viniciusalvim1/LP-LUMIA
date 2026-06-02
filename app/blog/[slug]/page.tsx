@@ -133,7 +133,7 @@ export default async function BlogPostPage({
 
             {hasContent ? (
               <div
-                className="blog-prose"
+                className="blog-prose blog-post"
                 dangerouslySetInnerHTML={{ __html: post.content! }}
               />
             ) : (

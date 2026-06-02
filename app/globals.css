@@ -249,3 +249,256 @@ body {
 .blog-prose h2:first-child {
   margin-top: 0;
 }
+
+/* ── Blog article rich classes ───────────────────────────────── */
+.blog-post {
+  max-width: 860px;
+  margin: 0 auto;
+  line-height: 1.75;
+  color: #2b2b2b;
+  font-family: var(--font-display);
+}
+
+.hero-intro {
+  padding: 48px 0 24px;
+}
+
+.blog-category {
+  color: #4CB794;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.blog-post h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  color: #183A51;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.blog-post .lead {
+  font-size: 19px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+
+.blog-post h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #183A51;
+  margin: 2em 0 0.6em;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.blog-post h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #183A51;
+  margin: 1.5em 0 0.5em;
+}
+
+.blog-post p {
+  margin-bottom: 1em;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #3a4754;
+}
+
+.blog-post ul {
+  list-style: none;
+  margin: 0.6em 0 1.2em;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+}
+
+.blog-post ul li {
+  padding-left: 1.5em;
+  position: relative;
+  font-size: 16px;
+  color: #3a4754;
+  line-height: 1.7;
+}
+
+.blog-post ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4CB794;
+}
+
+.blog-post ol {
+  list-style: decimal;
+  padding-left: 1.4em;
+  margin: 0.6em 0 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+}
+
+.blog-post ol li {
+  font-size: 16px;
+  color: #3a4754;
+  line-height: 1.7;
+}
+
+.blog-post strong {
+  font-weight: 600;
+  color: #183A51;
+}
+
+.blog-post a {
+  color: #1673A3;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-post section {
+  margin-bottom: 2em;
+}
+
+/* Caixas de destaque */
+.highlight-box,
+.content-card,
+.example-box {
+  background: rgba(76, 183, 148, 0.06);
+  border: 1px solid rgba(76, 183, 148, 0.25);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin: 24px 0;
+}
+
+.highlight-box strong,
+.content-card h3,
+.example-box h3 {
+  color: #183A51;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+/* Índice do artigo */
+.blog-summary {
+  background: #f4f8fb;
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin: 28px 0;
+}
+
+.blog-summary h2 {
+  font-size: 16px !important;
+  font-weight: 700;
+  color: #183A51;
+  margin: 0 0 14px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.blog-summary ul {
+  gap: 0.5em;
+}
+
+.blog-summary ul li {
+  font-size: 15px;
+}
+
+/* CTA interno */
+.cta-section {
+  background: linear-gradient(135deg, #183A51 0%, #1673A3 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 36px 32px;
+  margin: 48px 0;
+  text-align: center;
+}
+
+.cta-section h2 {
+  color: white !important;
+  margin-top: 0 !important;
+  font-size: 22px !important;
+}
+
+.cta-section p {
+  color: rgba(255,255,255,0.8) !important;
+  font-size: 16px !important;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #4CB794;
+  color: white;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none !important;
+  margin-top: 14px;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.cta-button:hover {
+  background: #3da882;
+}
+
+/* FAQ com details/summary */
+.faq-section h2 {
+  margin-bottom: 8px;
+}
+
+.faq-section details {
+  border-bottom: 1px solid #e8edf2;
+  padding: 18px 0;
+}
+
+.faq-section details:last-child {
+  border-bottom: none;
+}
+
+.faq-section summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #183A51;
+  font-size: 16px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.faq-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-section summary::after {
+  content: "+";
+  font-size: 22px;
+  font-weight: 300;
+  color: #4CB794;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.faq-section details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-section details p {
+  margin: 12px 0 4px;
+  font-size: 16px;
+  color: #3a4754;
+}
