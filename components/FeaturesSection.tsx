@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { storyBeats } from "@/content/story";
+import { track } from "@/lib/analytics";
 
 const TAB_LABELS: Record<string, string> = {
   contatos:   "Contatos",
@@ -60,7 +61,7 @@ export default function FeaturesSection() {
           {storyBeats.map((b) => (
             <button
               key={b.id}
-              onClick={() => setActive(b.id)}
+              onClick={() => { setActive(b.id); track("feature_tab_select", { feature: b.id }); }}
               className="px-4 py-1.5 rounded-[18px] border-2 border-[#4CB794] text-[14px] font-medium cursor-pointer transition-all duration-200"
               style={{
                 fontFamily: "var(--font-display)",
@@ -105,6 +106,7 @@ export default function FeaturesSection() {
 
               <a
                 href={FEATURE_ANCHOR[beat.id] ? `/funcionalidades#${FEATURE_ANCHOR[beat.id]}` : "/funcionalidades"}
+                onClick={() => track("feature_detail_click", { feature: beat.id })}
                 className="self-start inline-flex items-center gap-2 text-[14px] font-semibold px-6 py-3 rounded-[6px] transition-colors duration-200 cursor-pointer"
                 style={{
                   fontFamily: "var(--font-display)",

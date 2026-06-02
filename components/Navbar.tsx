@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { track } from "@/lib/analytics";
 
 const links = [
   { label: "Funcionalidades", href: "/funcionalidades" },
@@ -242,7 +243,7 @@ export default function Navbar() {
               <div className="p-4">
                 <a
                   href="/#cta"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => { track("cta_click", { label: "Demonstração", location: "navbar-mobile" }); setMenuOpen(false); }}
                   className="block w-full text-center text-[14px] font-semibold py-3 rounded-full cursor-pointer"
                   style={{
                     fontFamily: "var(--font-display)",

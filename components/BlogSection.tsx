@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { categoryColors, formatPostDate, type BlogPost } from "@/lib/blog";
+import { track } from "@/lib/analytics";
 
 function CategoryChip({ category }: { category: BlogPost["category"] }) {
   return (
@@ -66,6 +67,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
           {/* Featured */}
           <motion.a
             href={`/blog/${featured.slug}`}
+            onClick={() => track("select_blog_post", { slug: featured.slug, category: featured.category })}
             className="group block rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-pointer"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -115,6 +117,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
               <motion.a
                 key={post.slug}
                 href={`/blog/${post.slug}`}
+                onClick={() => track("select_blog_post", { slug: post.slug, category: post.category })}
                 className="group flex gap-5 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-pointer p-4"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { track } from "@/lib/analytics";
 
 const BLOB = "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com";
 
@@ -48,6 +49,7 @@ function VideoCard({ src, poster, name, role, quote, initials, index }: typeof t
     } else {
       v.play();
       setPlaying(true);
+      track("testimonial_play", { testimonial: name });
     }
   }
 

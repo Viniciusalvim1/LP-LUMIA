@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { categoryColors, formatPostDate, type BlogPost, type BlogCategory } from "@/lib/blog";
+import { track } from "@/lib/analytics";
 
 const CATEGORIES: (BlogCategory | "Todos")[] = ["Todos", "Gestão", "Marketing", "Vendas", "Atendimento"];
 
@@ -45,6 +46,7 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
             <motion.a
               key={post.slug}
               href={`/blog/${post.slug}`}
+              onClick={() => track("select_blog_post", { slug: post.slug, category: post.category })}
               className="group flex flex-col rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
