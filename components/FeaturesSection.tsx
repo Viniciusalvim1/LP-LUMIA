@@ -159,7 +159,7 @@ export default function FeaturesSection() {
                         className="text-[10px] text-gray-500 truncate"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
-                        app.lumiacrm.com.br/{beat.videoKey}
+                        app.lumiaclin.com.br/{beat.videoKey}
                       </span>
                     </div>
                   </div>

@@ -12,7 +12,7 @@ const integrations = [
 
 export default function IntegrationsSection() {
   return (
-    <section className="bg-[#F7F7F7] py-20">
+    <section id="integracoes" className="bg-[#F7F7F7] py-20 scroll-mt-24">
       <div className="max-w-[1100px] mx-auto px-5 lg:px-12">
         <div className="text-center mb-12">
           <span className="section-badge mb-4">Integrações</span>

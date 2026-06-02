@@ -134,6 +134,7 @@ export default function Navbar() {
           {/* CTA */}
           <a
             href="/#cta"
+            onClick={() => track("cta_click", { label: "Demonstração", location: "navbar" })}
             className="ml-2 text-[13px] font-semibold px-5 py-2 rounded-full cursor-pointer transition-all duration-200"
             style={{
               fontFamily: "var(--font-display)",
@@ -166,6 +167,20 @@ export default function Navbar() {
               className="rounded-xl object-cover transition-all duration-300"
               style={{ width: 34, height: 34 }}
             />
+          </a>
+
+          {/* Wordmark "lumia" centralizado */}
+          <a
+            href="/"
+            aria-label="Lumia"
+            className="text-[24px] font-semibold lowercase transition-colors duration-300"
+            style={{
+              fontFamily: "var(--font-display)",
+              color: s.logoText,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            lumia
           </a>
 
           <button

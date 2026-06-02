@@ -1,29 +1,30 @@
 import Image from "next/image";
 import Starfield from "./Starfield";
 
+const WHATSAPP =
+  "https://api.whatsapp.com/send/?phone=5531995671853&text=Quero%20saber%20mais%20sobre%20o%20sistema%20lumia&type=phone_number&app_absent=0";
+
 const footerLinks = [
   {
     title: "Produto",
     links: [
-      { label: "Funcionalidades", href: "#funcionalidades" },
-      { label: "Planos", href: "#cta" },
-      { label: "Integrações", href: "#" },
+      { label: "Funcionalidades", href: "/funcionalidades" },
+      { label: "Planos", href: "/#planos" },
+      { label: "Integrações", href: "/funcionalidades#integracoes" },
     ],
   },
   {
     title: "Empresa",
     links: [
-      { label: "Sobre Nós", href: "#sobre" },
-      { label: "Blog", href: "#" },
-      { label: "Carreiras", href: "#" },
+      { label: "Sobre Nós", href: "/#sobre" },
+      { label: "Blog", href: "/blog" },
     ],
   },
   {
     title: "Suporte",
     links: [
-      { label: "Central de Ajuda", href: "#" },
-      { label: "Contato", href: "mailto:contato@lumiacrm.com.br" },
-      { label: "Status", href: "#" },
+      { label: "Central de Ajuda", href: WHATSAPP },
+      { label: "Contato", href: "mailto:contato@lumiaclin.com.br" },
     ],
   },
 ];
@@ -114,17 +115,19 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p
-            className="text-[14px] text-white/40"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            © {new Date().getFullYear()} Lumia. Todos os Direitos Reservados.
-          </p>
+          <div style={{ fontFamily: "var(--font-display)" }}>
+            <p className="text-[14px] text-white/40">
+              © {new Date().getFullYear()} Lumia. Todos os Direitos Reservados.
+            </p>
+            <p className="text-[12px] text-white/25 mt-1">
+              LUMIA TECNOLOGIA EM GESTÃO DE CLÍNICAS LTDA · CNPJ 53.025.481/0001-56
+            </p>
+          </div>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-[13px] text-white/40 hover:text-white/60 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+            <a href="/privacidade" className="text-[13px] text-white/40 hover:text-white/60 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
               Política de Privacidade
             </a>
-            <a href="#" className="text-[13px] text-white/40 hover:text-white/60 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+            <a href="/termos" className="text-[13px] text-white/40 hover:text-white/60 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
               Termos de Uso
             </a>
           </div>

@@ -1,95 +1,102 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 
 interface StarProps {
   id: number;
-  startY: number;   // y inicial (px do topo da seção)
-  arcUp: number;    // sobe X px antes de cair (arco inicial)
-  endDrop: number;  // cai X px no total
-  width: number;    // comprimento da cauda (px)
-  duration: number; // segundos para atravessar
-  angle: number;    // rotação da cauda (deg)
+  fromX: number;   // x de partida (off-screen)
+  dx: number;      // deslocamento horizontal total (sinalizado)
+  startY: number;  // y inicial
+  vy0: number;     // velocidade vertical inicial (negativa = lançada pra cima)
+  g: number;       // "gravidade" — aceleração vertical
+  width: number;   // comprimento da cauda
+  duration: number;
 }
 
 function generateStar(id: number): StarProps {
-  const startY   = 60  + Math.random() * 360;  // 60–420 px do topo
-  const arcUp    = 25  + Math.random() * 55;   // sobe 25–80 px
-  const endDrop  = 260 + Math.random() * 220;  // cai 260–480 px
-  const width    = 130 + Math.floor(Math.random() * 120); // 130–250 px
-  const duration = 2.0 + Math.random() * 1.4;  // 2.0–3.4 s
-  // ângulo médio da trajetória (horizontal leve inclinação para baixo)
-  const angle    = Math.atan2(endDrop, 1930) * (180 / Math.PI);
-  return { id, startY, arcUp, endDrop, width, duration, angle };
+  const W = typeof window !== "undefined" ? window.innerWidth : 1440;
+
+  // Direção aleatória
+  const dir = Math.random() < 0.5 ? 1 : -1;
+  const fromX = dir === 1 ? -340 : W + 340;
+  const dx = (dir === 1 ? 1 : -1) * (W + 680);
+
+  const startY = 20 + Math.random() * 420;
+
+  // Física vertical (em px por unidade de tempo normalizado):
+  //  vy0 < 0  → arremessada pra cima, sobe e cai (parábola côncava)
+  //  vy0 > 0  → já descendo e acelerando (queda de gravidade)
+  const vy0 = -300 + Math.random() * 460; // -300 .. +160
+  const g = 280 + Math.random() * 700; //  280 .. 980
+
+  const width = 110 + Math.floor(Math.random() * 180); // 110–290 px
+  const duration = 1.8 + Math.random() * 2.0; // 1.8–3.8 s
+
+  return { id, fromX, dx, startY, vy0, g, width, duration };
 }
 
 // ── visual de uma estrela ──────────────────────────────────────────
 function Star({
-  startY, arcUp, endDrop, width, duration, angle, onComplete,
+  fromX, dx, startY, vy0, g, width, duration, onComplete,
 }: StarProps & { onComplete: () => void }) {
+  // t: progresso normalizado 0→1, em velocidade constante (linear)
+  const t = useMotionValue(0);
+
+  useEffect(() => {
+    const controls = animate(t, 1, { duration, ease: "linear" });
+    const timer = setTimeout(onComplete, duration * 1000 + 40);
+    return () => {
+      controls.stop();
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Posição: X linear (velocidade horizontal constante = física real),
+  // Y quadrático (aceleração vertical = parábola de gravidade)
+  const x = useTransform(t, (v) => fromX + dx * v);
+  const y = useTransform(t, (v) => startY + vy0 * v + 0.5 * g * v * v);
+
+  // Rotação acompanha a TANGENTE da curva a cada instante:
+  // velocidade = (dx, vy0 + g·t). É isso que dá a sensação fluida.
+  const rotate = useTransform(
+    t,
+    (v) => (Math.atan2(vy0 + g * v, dx) * 180) / Math.PI
+  );
+
+  const opacity = useTransform(t, [0, 0.06, 0.85, 1], [0, 1, 0.92, 0]);
+
   return (
-    /*
-     * Camada externa: move X linearmente (esquerda → direita)
-     * + controla opacidade (fade-in rápido, fade-out suave no fim)
-     */
     <motion.div
-      className="absolute pointer-events-none"
-      style={{ top: 0, left: 0 }}
-      initial={{ x: -280, opacity: 0 }}
-      animate={{
-        x: 1680,
-        opacity: [0, 1, 0.9, 0],
-      }}
-      transition={{
-        x:       { duration, ease: "linear" },
-        opacity: { duration, ease: "linear", times: [0, 0.05, 0.88, 1] },
-      }}
-      onAnimationComplete={onComplete}
+      className="absolute top-0 left-0 pointer-events-none"
+      style={{ x, y, rotate, opacity, transformOrigin: "right center" }}
     >
-      {/*
-       * Camada interna: move Y ao longo da parábola
-       * sobe levemente → cai com gravidade (easeIn na descida)
-       */}
-      <motion.div
-        style={{ position: "absolute", top: startY, left: 0 }}
-        initial={{ y: 0 }}
-        animate={{ y: [0, -arcUp, endDrop] }}
-        transition={{
-          duration,
-          times: [0, 0.25, 1],
-          ease: ["easeOut", "easeIn"],
+      {/* Cauda: gradiente transparente → branco (cabeça na direita) */}
+      <div
+        style={{
+          width,
+          height: 1.6,
+          borderRadius: 999,
+          background:
+            "linear-gradient(to right, transparent 0%, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.78) 78%, white 100%)",
         }}
-      >
-        {/* Cauda + cabeça — rotacionadas pelo ângulo médio da trajetória */}
-        <div style={{ transform: `rotate(${angle}deg)`, transformOrigin: "right center" }}>
-          {/* Cauda: gradiente transparente → branco */}
-          <div
-            style={{
-              width,
-              height: 1.5,
-              borderRadius: 999,
-              background:
-                "linear-gradient(to right, transparent 0%, rgba(255,255,255,0.10) 25%, rgba(255,255,255,0.80) 75%, white 100%)",
-            }}
-          />
-          {/* Cabeça brilhante */}
-          <div
-            style={{
-              position: "absolute",
-              right: -2,
-              top: "50%",
-              transform: "translateY(-50%)",
-              width: 4,
-              height: 4,
-              borderRadius: "50%",
-              background: "white",
-              boxShadow:
-                "0 0 5px 2px rgba(255,255,255,0.95), 0 0 18px 6px rgba(180,235,255,0.55)",
-            }}
-          />
-        </div>
-      </motion.div>
+      />
+      {/* Cabeça brilhante */}
+      <div
+        style={{
+          position: "absolute",
+          right: -2,
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: 4.5,
+          height: 4.5,
+          borderRadius: "50%",
+          background: "white",
+          boxShadow:
+            "0 0 6px 2px rgba(255,255,255,0.95), 0 0 20px 7px rgba(180,235,255,0.55)",
+        }}
+      />
     </motion.div>
   );
 }
@@ -97,8 +104,8 @@ function Star({
 // ── máquina de estado: 1 estrela por vez ─────────────────────────
 export default function ShootingStars() {
   const [star, setStar] = useState<StarProps | null>(null);
-  const idRef  = useRef(0);
-  const timer  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const idRef = useRef(0);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const scheduleNext = useCallback(() => {
     const gap = 2200 + Math.random() * 3800; // 2.2–6 s de intervalo

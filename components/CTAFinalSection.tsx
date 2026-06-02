@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Starfield from "./Starfield";
 import { getSupabase } from "@/lib/supabase";
+import { track } from "@/lib/analytics";
 
 export default function CTAFinalSection() {
   const [form, setForm] = useState({ nome: "", sobrenome: "", email: "", telefone: "" });
@@ -30,6 +31,11 @@ export default function CTAFinalSection() {
       return;
     }
     setSubmitted(true);
+    track("generate_lead", { origem: "cta-final", form_location: "cta-final" });
+    // Direciona para o cadastro do trial após confirmar o envio
+    setTimeout(() => {
+      window.location.href = "https://app.lumiaclin.com.br/#signup";
+    }, 1500);
   }
 
   return (
@@ -115,7 +121,7 @@ export default function CTAFinalSection() {
                     Mensagem enviada!
                   </p>
                   <p className="text-[#69727D] text-sm mt-2" style={{ fontFamily: "var(--font-display)" }}>
-                    Nossa equipe entrará em contato em até 24h.
+                    Redirecionando você para criar sua conta...
                   </p>
                 </motion.div>
               ) : (

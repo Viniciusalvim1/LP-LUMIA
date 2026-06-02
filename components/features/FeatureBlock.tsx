@@ -67,7 +67,7 @@ export default function FeatureBlock({ feature }: Props) {
               <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
               <div className="flex-1 mx-2 md:mx-3 h-5 rounded bg-[#DCDCDC] hidden sm:flex items-center px-2">
                 <span className="text-[10px] text-gray-500 truncate" style={{ fontFamily: "var(--font-display)" }}>
-                  app.lumiacrm.com.br/{feature.id}
+                  app.lumiaclin.com.br/{feature.id}
                 </span>
               </div>
             </div>

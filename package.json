@@ -10,6 +10,7 @@
     "upload-videos": "tsx scripts/upload-videos.ts"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.7",
     "@supabase/supabase-js": "^2.106.2",
     "@vercel/blob": "^2.4.0",
     "framer-motion": "^12.40.0",

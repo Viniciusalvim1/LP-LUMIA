@@ -3,6 +3,7 @@ import { Montserrat, Questrial } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -41,10 +42,6 @@ export const metadata: Metadata = {
   creator: "Lumia",
   publisher: "Lumia",
   alternates: { canonical: "/" },
-  icons: {
-    icon: "/LOGO LUMIA/9.png",
-    apple: "/LOGO LUMIA/9.png",
-  },
   openGraph: {
     title: "Lumia — O melhor sistema de gestão para clínicas de estética",
     description:
@@ -87,6 +84,7 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
+      <GoogleAnalytics gaId="G-KSJZK2TP3R" />
     </html>
   );
 }

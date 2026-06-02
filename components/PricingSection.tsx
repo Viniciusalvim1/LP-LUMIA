@@ -1,14 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import Starfield from "./Starfield";
+import { track } from "@/lib/analytics";
 
 // ── Frase que se forma no scroll ─────────────────────────────────
 type Token = { text: string; hl?: boolean };
@@ -25,11 +20,12 @@ function Word({
 }: {
   token: Token; index: number; total: number; progress: MotionValue<number>;
 }) {
-  // cada palavra acende numa fatia do progresso do scroll
-  const start = index / total;
-  const end = start + 1 / total;
-  const opacity = useTransform(progress, [start, end], [0.12, 1]);
-  const y = useTransform(progress, [start, end], [8, 0]);
+  // cada palavra acende numa fatia do progresso do scroll (a frase só
+  // completa conforme o usuário rola)
+  const start = 0.05 + (index / total) * 0.8;
+  const end = start + 0.8 / total;
+  const opacity = useTransform(progress, [start, end], [0.1, 1]);
+  const y = useTransform(progress, [start, end], [10, 0]);
 
   return (
     <motion.span style={{ opacity, y }} className="inline-block mr-[0.28em]">
@@ -38,7 +34,7 @@ function Word({
   );
 }
 
-// ── Card com revelação por lanterna de luz ───────────────────────
+// ── Plano ────────────────────────────────────────────────────────
 const PLAN = {
   name: "Lumia Completo",
   price: "349,90",
@@ -54,47 +50,16 @@ const PLAN = {
   ],
 };
 
-function RevealCard() {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [revealed, setRevealed] = useState(false);
-  const [spot, setSpot] = useState<{ x: number; y: number } | null>(null);
-
-  // prefers-reduced-motion → revela direto
-  useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-      setRevealed(true);
-    }
-  }, []);
-
-  function move(clientX: number, clientY: number) {
-    const r = cardRef.current?.getBoundingClientRect();
-    if (!r) return;
-    setSpot({ x: clientX - r.left, y: clientY - r.top });
-  }
-
-  const mask = spot
-    ? `radial-gradient(circle 150px at ${spot.x}px ${spot.y}px, transparent 0%, transparent 38%, rgba(0,0,0,0.85) 70%, #000 100%)`
-    : undefined;
-
+function PlanCard() {
   return (
     <div className="relative w-full max-w-[420px] mx-auto">
       {/* glow ambiente */}
       <div className="absolute -inset-6 bg-[radial-gradient(ellipse_at_center,rgba(76,183,148,0.18)_0%,transparent_70%)] blur-xl pointer-events-none" />
 
       <div
-        ref={cardRef}
         className="relative rounded-3xl overflow-hidden border border-white/12"
-        style={{ background: "rgba(255,255,255,0.04)", minHeight: 520 }}
-        onMouseMove={(e) => !revealed && move(e.clientX, e.clientY)}
-        onMouseLeave={() => !revealed && (setSpot(null), setRevealed(true))}
-        onTouchMove={(e) => {
-          if (revealed) return;
-          const t = e.touches[0];
-          move(t.clientX, t.clientY);
-        }}
-        onTouchEnd={() => !revealed && setRevealed(true)}
+        style={{ background: "rgba(255,255,255,0.04)" }}
       >
-        {/* ── Conteúdo do plano (sempre no DOM) ── */}
         <div className="relative z-10 p-8 flex flex-col items-center text-center">
           <span
             className="inline-block bg-[#4CB794]/20 text-[#4CB794] text-[13px] font-medium px-4 py-1.5 rounded-full mb-6"
@@ -142,97 +107,86 @@ function RevealCard() {
           </ul>
 
           <a
-            href="https://app.lumiaclin.com.br/#login"
+            href="https://app.lumiaclin.com.br/#signup"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("trial_click", { location: "planos" })}
             className="w-full text-center text-[15px] font-semibold py-4 rounded-[10px] cursor-pointer transition-all duration-200"
             style={{ fontFamily: "var(--font-display)", background: "#4CB794", color: "#fff", boxShadow: "0 4px 20px rgba(76,183,148,0.4)" }}
           >
             Começar trial gratuito →
           </a>
         </div>
-
-        {/* ── Cobertura (céu noturno) com furo de luz ── */}
-        <AnimatePresence>
-          {!revealed && (
-            <motion.div
-              className="absolute inset-0 z-20 flex flex-col items-center justify-center cursor-pointer select-none"
-              style={{
-                background: "linear-gradient(160deg, #0a1a28 0%, #102a3e 100%)",
-                maskImage: mask,
-                WebkitMaskImage: mask,
-              }}
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Starfield count={70} seed={11} />
-              {/* lua */}
-              <svg className="relative w-12 h-12 text-white/30 mb-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2C8.5 2 6 5 6 8.5c0 3 1.8 5.5 4.5 6.5L9 22h6l-1.5-7C16.2 14 18 11.5 18 8.5 18 5 15.5 2 12 2z" />
-              </svg>
-              <p className="relative text-white/70 text-[15px] font-medium" style={{ fontFamily: "var(--font-display)" }}>
-                Passe o mouse para revelar
-              </p>
-              <p className="relative text-white/35 text-[13px] mt-1" style={{ fontFamily: "var(--font-display)" }}>
-                no celular, arraste o dedo
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-
-      {/* Fallback acessível */}
-      {!revealed && (
-        <button
-          onClick={() => setRevealed(true)}
-          className="mt-4 mx-auto block text-[13px] text-white/45 hover:text-white/80 underline underline-offset-4 transition-colors cursor-pointer"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          Ver valor
-        </button>
-      )}
     </div>
   );
 }
 
 // ── Seção ────────────────────────────────────────────────────────
 export default function PricingSection() {
-  const sentenceRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: sentenceRef,
-    offset: ["start 0.85", "end 0.55"],
+    target: scrollRef,
+    offset: ["start start", "end end"],
   });
 
-  return (
-    <section id="planos" className="relative bg-[#183A51] py-24 overflow-hidden">
-      <Starfield count={130} seed={10} />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(76,183,148,0.08)_0%,transparent_60%)] pointer-events-none" />
+  // Indicador "role para baixo" some depois que a frase termina de formar
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.7, 0.9], [1, 1, 0]);
 
-      <div className="relative z-10 max-w-[1100px] mx-auto px-5 lg:px-12">
-        <div className="text-center mb-4">
+  return (
+    <section id="planos" className="relative bg-[#183A51]">
+      <Starfield count={150} seed={10} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(76,183,148,0.07)_0%,transparent_60%)] pointer-events-none" />
+
+      {/* ── Bloco 1: frase sticky que se completa com o scroll ── */}
+      <div ref={scrollRef} className="relative" style={{ height: "180vh" }}>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-5 lg:px-12">
           <span
-            className="inline-block bg-[#4CB794]/20 text-[#4CB794] text-[14px] font-medium px-4 py-1.5 rounded-full"
+            className="inline-block bg-[#4CB794]/20 text-[#4CB794] text-[14px] font-medium px-4 py-1.5 rounded-full mb-8"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Planos
           </span>
-        </div>
 
-        {/* Frase que se forma no scroll */}
-        <div ref={sentenceRef} className="max-w-[820px] mx-auto text-center mb-16">
           <p
-            className="text-[26px] md:text-[36px] font-semibold leading-[1.35] text-white"
+            className="max-w-[860px] text-center text-[28px] md:text-[40px] font-semibold leading-[1.35] text-white"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {SENTENCE.map((tok, i) => (
               <Word key={i} token={tok} index={i} total={SENTENCE.length} progress={scrollYProgress} />
             ))}
           </p>
-        </div>
 
-        {/* Card revelável */}
-        <RevealCard />
+          {/* indicador de scroll */}
+          <motion.div
+            className="absolute bottom-10 flex flex-col items-center gap-2"
+            style={{ opacity: hintOpacity }}
+          >
+            <span className="text-[12px] text-white/40 tracking-widest uppercase" style={{ fontFamily: "var(--font-display)" }}>
+              Role para baixo
+            </span>
+            <motion.div
+              className="w-5 h-8 rounded-full border border-white/25 flex justify-center pt-1.5"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="w-1 h-2 rounded-full bg-[#4CB794]" />
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── Bloco 2: card do plano ── */}
+      <div className="relative pb-28 pt-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          onViewportEnter={() => track("view_pricing")}
+        >
+          <PlanCard />
+        </motion.div>
       </div>
     </section>
   );

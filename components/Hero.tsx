@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, type Transition } from "framer-motion";
 import Starfield from "./Starfield";
 import ShootingStars from "./ShootingStars";
+import { track } from "@/lib/analytics";
 
 // ── Frases com segmentos destacados ──────────────────────────────
 type Seg = { text: string; h: boolean };
@@ -196,9 +197,10 @@ export default function Hero() {
 
             <motion.div className="flex flex-col sm:flex-row gap-3 mb-6" {...fadeUp(0.4)}>
               <a
-                href="https://app.lumiaclin.com.br/#login"
+                href="https://app.lumiaclin.com.br/#signup"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track("trial_click", { location: "hero" })}
                 className="inline-flex items-center justify-center text-[15px] font-semibold px-7 py-4 rounded-[8px] transition-all duration-200 cursor-pointer"
                 style={{
                   fontFamily: "var(--font-display)",
@@ -224,6 +226,7 @@ export default function Hero() {
                 href="https://api.whatsapp.com/send/?phone=5531995671853&text=Quero%20saber%20mais%20sobre%20o%20sistema%20lumia&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track("whatsapp_click", { location: "hero" })}
                 className="inline-flex items-center justify-center gap-2.5 text-[15px] font-semibold px-7 py-4 rounded-[8px] border transition-all duration-200 cursor-pointer"
                 style={{
                   fontFamily: "var(--font-display)",
@@ -308,7 +311,7 @@ export default function Hero() {
                 className="text-[11px] text-white/35"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                app.lumiacrm.com.br/dashboard
+                app.lumiaclin.com.br/dashboard
               </span>
             </div>
           </div>
