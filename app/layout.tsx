@@ -42,6 +42,14 @@ export const metadata: Metadata = {
   creator: "Lumia",
   publisher: "Lumia",
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: "Lumia — O melhor sistema de gestão para clínicas de estética",
     description:
