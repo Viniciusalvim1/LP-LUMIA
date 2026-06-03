@@ -12,6 +12,23 @@ function youtubeId(url: string): string | null {
   return m ? m[1] : null;
 }
 
+// Extrai pares pergunta/resposta dos blocos <details>/<summary> do HTML
+function extractFaqs(html: string): { q: string; a: string }[] {
+  const faqs: { q: string; a: string }[] = [];
+  const detailsRe = /<details[^>]*>([\s\S]*?)<\/details>/gi;
+  let match;
+  while ((match = detailsRe.exec(html)) !== null) {
+    const inner = match[1];
+    const summaryMatch = inner.match(/<summary[^>]*>([\s\S]*?)<\/summary>/i);
+    const answerMatch = inner.match(/<\/summary>([\s\S]*?)$/i);
+    if (!summaryMatch || !answerMatch) continue;
+    const q = summaryMatch[1].replace(/<[^>]+>/g, "").trim();
+    const a = answerMatch[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    if (q && a) faqs.push({ q, a });
+  }
+  return faqs;
+}
+
 export const revalidate = 300;
 export const dynamicParams = true;
 
@@ -76,6 +93,7 @@ export default async function BlogPostPage({
   const related = [...sameCategory, ...different].slice(0, 3);       // cards no rodapé
 
   const hasContent = !!post.content?.trim();
+  const faqs = post.content ? extractFaqs(post.content) : [];
   const postUrl = `${site.url}/blog/${post.slug}`;
   const coverUrl = post.cover ? `${site.url}${post.cover}` : site.logo;
 
@@ -117,10 +135,21 @@ export default async function BlogPostPage({
     ],
   };
 
+  const faqSchema = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  } : null;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <Navbar />
 
       {/* ── Hero do artigo ── */}
