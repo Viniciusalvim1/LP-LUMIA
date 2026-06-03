@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getAllSlugs } from "@/lib/blog";
+import { getAllSlugs, CATEGORY_SLUG } from "@/lib/blog";
 
 export const revalidate = 3600;
 
@@ -28,5 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     postRoutes = [];
   }
 
-  return [...staticRoutes, ...postRoutes];
+  const categoryRoutes: MetadataRoute.Sitemap = Object.keys(CATEGORY_SLUG).map((slug) => ({
+    url: `${SITE_URL}/blog/categoria/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.75,
+  }));
+
+  return [...staticRoutes, ...categoryRoutes, ...postRoutes];
 }

@@ -99,6 +99,44 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
   return { ...mapRow(row), content: row.content ?? undefined };
 }
 
+// Mapa de slug de URL → nome real da categoria
+export const CATEGORY_SLUG: Record<string, BlogCategory> = {
+  gestao:      "Gestão",
+  marketing:   "Marketing",
+  vendas:      "Vendas",
+  atendimento: "Atendimento",
+};
+
+export const CATEGORY_URL_SLUG: Record<BlogCategory, string> = {
+  "Gestão":      "gestao",
+  "Marketing":   "marketing",
+  "Vendas":      "vendas",
+  "Atendimento": "atendimento",
+};
+
+export const CATEGORY_DESCRIPTION: Record<BlogCategory, string> = {
+  "Gestão":      "Organização, processos e ferramentas para clínicas de estética crescerem com eficiência.",
+  "Marketing":   "Estratégias práticas de marketing digital para atrair e converter mais pacientes.",
+  "Vendas":      "Funil de vendas, conversão e técnicas para vender mais serviços na sua clínica.",
+  "Atendimento": "Como melhorar a experiência do paciente e fidelizar quem já passou pela sua clínica.",
+};
+
+/** Posts de uma categoria específica. */
+export async function getPostsByCategory(category: BlogCategory): Promise<BlogPost[]> {
+  const { data, error } = await getSupabase()
+    .from("posts")
+    .select("slug, title, excerpt, category, read_minutes, published_at, cover_url, author_name, video_url")
+    .eq("status", "published")
+    .eq("category", category)
+    .order("published_at", { ascending: false });
+
+  if (error) {
+    console.error("[blog] erro ao buscar posts por categoria:", error.message);
+    return [];
+  }
+  return (data as PostRow[]).map(mapRow);
+}
+
 /** Slugs de todos os posts publicados — para generateStaticParams. */
 export async function getAllSlugs(): Promise<string[]> {
   const { data } = await getSupabase()

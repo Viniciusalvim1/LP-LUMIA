@@ -7,14 +7,14 @@ import { track } from "@/lib/analytics";
 
 const CATEGORIES: (BlogCategory | "Todos")[] = ["Todos", "Gestão", "Marketing", "Vendas", "Atendimento"];
 
-export default function BlogList({ posts }: { posts: BlogPost[] }) {
+export default function BlogList({ posts, hideFilter }: { posts: BlogPost[]; hideFilter?: boolean }) {
   const [filter, setFilter] = useState<BlogCategory | "Todos">("Todos");
-  const visible = filter === "Todos" ? posts : posts.filter((p) => p.category === filter);
+  const visible = hideFilter ? posts : (filter === "Todos" ? posts : posts.filter((p) => p.category === filter));
 
   return (
     <div>
       {/* Filtro */}
-      <div className="flex flex-wrap gap-2 justify-center mb-12">
+      {!hideFilter && <div className="flex flex-wrap gap-2 justify-center mb-12">
         {CATEGORIES.map((cat) => {
           const active = filter === cat;
           return (
@@ -33,7 +33,8 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
             </button>
           );
         })}
-      </div>
+      </div>}
+
 
       {/* Grid */}
       {visible.length === 0 ? (
