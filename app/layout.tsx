@@ -3,7 +3,7 @@ import { Montserrat, Questrial } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -92,7 +92,14 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
-      <GoogleAnalytics gaId="G-KSJZK2TP3R" />
+      {/* GA4 com lazyOnload — carrega só quando o browser está ocioso */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-KSJZK2TP3R"
+        strategy="lazyOnload"
+      />
+      <Script id="ga4-init" strategy="lazyOnload">
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KSJZK2TP3R',{send_page_view:true});`}
+      </Script>
     </html>
   );
 }
