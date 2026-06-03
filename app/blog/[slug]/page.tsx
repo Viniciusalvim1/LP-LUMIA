@@ -62,9 +62,13 @@ export default async function BlogPostPage({
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  // posts relacionados (mesma categoria ou recentes), exceto o atual
-  const all = await getPosts(6);
-  const related = all.filter((p) => p.slug !== post.slug).slice(0, 2);
+  const all = await getPosts(24);
+  const others = all.filter((p) => p.slug !== post.slug);
+  // mesma categoria primeiro, depois outros — para os dois blocos
+  const sameCategory = others.filter((p) => p.category === post.category);
+  const different = others.filter((p) => p.category !== post.category);
+  const internalLinks = [...sameCategory, ...different].slice(0, 4); // bloco "Leia também"
+  const related = [...sameCategory, ...different].slice(0, 3);       // cards no rodapé
 
   const hasContent = !!post.content?.trim();
   const postUrl = `${site.url}/blog/${post.slug}`;
@@ -198,6 +202,35 @@ export default async function BlogPostPage({
               {post.excerpt}
             </p>
 
+            {/* ── Leia também (links internos) ── */}
+            {internalLinks.length > 0 && (
+              <aside
+                className="mb-10 rounded-2xl border border-[#e8f0eb] bg-[#f4fbf7] px-6 py-5"
+                aria-label="Artigos relacionados"
+              >
+                <p
+                  className="text-[12px] font-semibold uppercase tracking-widest text-[#4CB794] mb-3"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Leia também
+                </p>
+                <ul className="flex flex-col gap-2">
+                  {internalLinks.map((p) => (
+                    <li key={p.slug} className="flex items-start gap-2">
+                      <span className="mt-[6px] w-1.5 h-1.5 rounded-full bg-[#4CB794] shrink-0" />
+                      <a
+                        href={`/blog/${p.slug}`}
+                        className="text-[15px] text-[#183A51] hover:text-[#1673A3] transition-colors leading-snug"
+                        style={{ fontFamily: "var(--font-display)" }}
+                      >
+                        {p.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )}
+
             {hasContent ? (
               <div
                 className="blog-prose blog-post"
@@ -211,26 +244,27 @@ export default async function BlogPostPage({
               </div>
             )}
 
-            {/* Posts relacionados */}
+            {/* ── Continue lendo (cards rodapé) ── */}
             {related.length > 0 && (
-              <div className="mt-16 pt-10 border-t border-gray-100">
+              <nav className="mt-16 pt-10 border-t border-gray-100" aria-label="Continue lendo">
                 <h2
                   className="text-[20px] font-semibold text-[#183A51] mb-6"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   Continue lendo
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {related.map((r) => (
                     <a
                       key={r.slug}
                       href={`/blog/${r.slug}`}
+                      title={r.title}
                       className="group rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300"
                     >
-                      <div className="relative h-28" style={{ background: r.gradient }}>
+                      <div className="relative h-24" style={{ background: r.gradient }}>
                         {r.cover && (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={r.cover} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                          <img src={r.cover} alt={r.title} className="absolute inset-0 w-full h-full object-cover" />
                         )}
                       </div>
                       <div className="p-4">
@@ -241,7 +275,7 @@ export default async function BlogPostPage({
                           {r.category}
                         </span>
                         <h3
-                          className="text-[15px] font-semibold text-[#183A51] leading-[1.35] mt-1 group-hover:text-[#1673A3] transition-colors"
+                          className="text-[14px] font-semibold text-[#183A51] leading-[1.35] mt-1 group-hover:text-[#1673A3] transition-colors"
                           style={{ fontFamily: "var(--font-display)" }}
                         >
                           {r.title}
@@ -250,7 +284,7 @@ export default async function BlogPostPage({
                     </a>
                   ))}
                 </div>
-              </div>
+              </nav>
             )}
           </div>
         </div>
