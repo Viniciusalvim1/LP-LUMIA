@@ -17,6 +17,7 @@ export interface BlogPost {
   cover?: string;      // cover_url
   gradient: string;    // capa-fallback derivada da categoria
   author: string;
+  videoUrl?: string;   // video_url (YouTube)
 }
 
 export const categoryColors: Record<BlogCategory, string> = {
@@ -44,6 +45,7 @@ interface PostRow {
   published_at: string | null;
   cover_url: string | null;
   author_name: string;
+  video_url: string | null;
 }
 
 function mapRow(row: PostRow): BlogPost {
@@ -57,6 +59,7 @@ function mapRow(row: PostRow): BlogPost {
     cover: row.cover_url ?? undefined,
     gradient: categoryGradients[row.category],
     author: row.author_name,
+    videoUrl: row.video_url ?? undefined,
   };
 }
 
@@ -64,7 +67,7 @@ function mapRow(row: PostRow): BlogPost {
 export async function getPosts(limit?: number): Promise<BlogPost[]> {
   let query = getSupabase()
     .from("posts")
-    .select("slug, title, excerpt, category, read_minutes, published_at, cover_url, author_name")
+    .select("slug, title, excerpt, category, read_minutes, published_at, cover_url, author_name, video_url")
     .eq("status", "published")
     .order("published_at", { ascending: false });
 
@@ -86,7 +89,7 @@ export interface BlogPostFull extends BlogPost {
 export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> {
   const { data, error } = await getSupabase()
     .from("posts")
-    .select("slug, title, excerpt, content, category, read_minutes, published_at, cover_url, author_name")
+    .select("slug, title, excerpt, content, category, read_minutes, published_at, cover_url, author_name, video_url")
     .eq("status", "published")
     .eq("slug", slug)
     .maybeSingle();

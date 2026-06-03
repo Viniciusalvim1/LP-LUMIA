@@ -7,6 +7,11 @@ import Starfield from "@/components/Starfield";
 import { getPostBySlug, getAllSlugs, getPosts, categoryColors, formatPostDate } from "@/lib/blog";
 import { site } from "@/lib/site";
 
+function youtubeId(url: string): string | null {
+  const m = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
 export const revalidate = 300;
 export const dynamicParams = true;
 
@@ -241,6 +246,37 @@ export default async function BlogPostPage({
                 <p className="text-[15px] text-[#69727D]" style={{ fontFamily: "var(--font-display)" }}>
                   ✍️ Conteúdo completo deste artigo em breve.
                 </p>
+              </div>
+            )}
+
+            {/* ── Veja na prática (vídeo tutorial) ── */}
+            {post.videoUrl && youtubeId(post.videoUrl) && (
+              <div className="mt-14 pt-10 border-t border-gray-100">
+                <p
+                  className="text-[12px] font-semibold uppercase tracking-widest text-[#4CB794] mb-2"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Veja na prática
+                </p>
+                <h2
+                  className="text-[20px] font-semibold text-[#183A51] mb-5"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Tutorial em vídeo: como funciona no sistema
+                </h2>
+                <div
+                  className="relative w-full rounded-2xl overflow-hidden shadow-lg"
+                  style={{ paddingBottom: "56.25%" }}
+                >
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youtubeId(post.videoUrl)}`}
+                    title={`Tutorial: ${post.title}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
               </div>
             )}
 
