@@ -8,6 +8,7 @@ export interface FeatureContent {
   whyMatters: string;     // Por que isso importa
   dataManaged?: string[]; // Dados gerenciados (recolhível)
   videoKey?: string;      // chave do vídeo em /videos/ (se houver)
+  videoUrl?: string;      // URL direta (Blob, CDN) — sobrescreve videoKey
 }
 
 export interface FeatureCategory {
@@ -71,6 +72,7 @@ export const featureCategories: FeatureCategory[] = [
         whyMatters:
           "Elimina o papel e garante validade jurídica. O cliente assina na hora, o contrato fica arquivado digitalmente e o profissional não gerencia arquivos físicos. Se o atendimento vier agendado, os dados do cliente e do procedimento já vêm pré-preenchidos.",
         videoKey: "contatos",
+        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/crm%20animac%CC%A7a%CC%83o.mp4",
       },
       {
         id: "estoque",
@@ -220,6 +222,7 @@ export const featureCategories: FeatureCategory[] = [
           "Protocolos de tratamento com dosagem e evolução",
         ],
         videoKey: "contatos",
+        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/crm%20animac%CC%A7a%CC%83o.mp4",
       },
       {
         id: "fichas",

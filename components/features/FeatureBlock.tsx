@@ -71,18 +71,25 @@ export default function FeatureBlock({ feature }: Props) {
                 </span>
               </div>
             </div>
-            {feature.videoKey ? (
+            {(feature.videoUrl || feature.videoKey) ? (
               <div className="relative w-full aspect-video bg-gray-100">
                 <video
                   autoPlay
                   loop
                   muted
                   playsInline
+                  preload="none"
                   className="absolute inset-0 w-full h-full object-cover"
-                  poster={`/videos/${feature.videoKey}-poster.jpg`}
+                  poster={feature.videoUrl ? undefined : `/videos/${feature.videoKey}-poster.jpg`}
                 >
-                  <source src={`/videos/${feature.videoKey}.webm`} type="video/webm" />
-                  <source src={`/videos/${feature.videoKey}.mp4`} type="video/mp4" />
+                  {feature.videoUrl ? (
+                    <source src={feature.videoUrl} type="video/mp4" />
+                  ) : (
+                    <>
+                      <source src={`/videos/${feature.videoKey}.webm`} type="video/webm" />
+                      <source src={`/videos/${feature.videoKey}.mp4`} type="video/mp4" />
+                    </>
+                  )}
                 </video>
               </div>
             ) : (

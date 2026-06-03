@@ -282,7 +282,7 @@ export default async function BlogPostPage({
             )}
 
             {/* ── Veja na prática (vídeo tutorial) ── */}
-            {post.videoUrl && youtubeId(post.videoUrl) && (
+            {post.videoUrl && (
               <div className="mt-14 pt-10 border-t border-gray-100">
                 <p
                   className="text-[12px] font-semibold uppercase tracking-widest text-[#4CB794] mb-2"
@@ -296,19 +296,27 @@ export default async function BlogPostPage({
                 >
                   Tutorial em vídeo: como funciona no sistema
                 </h2>
-                <div
-                  className="relative w-full rounded-2xl overflow-hidden shadow-lg"
-                  style={{ paddingBottom: "56.25%" }}
-                >
-                  <iframe
-                    src={`https://www.youtube.com/embed/${youtubeId(post.videoUrl)}`}
-                    title={`Tutorial: ${post.title}`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full border-0"
-                  />
-                </div>
+                {youtubeId(post.videoUrl) ? (
+                  <div className="relative w-full rounded-2xl overflow-hidden shadow-lg" style={{ paddingBottom: "56.25%" }}>
+                    <iframe
+                      src={`https://www.youtube.com/embed/${youtubeId(post.videoUrl)}`}
+                      title={`Tutorial: ${post.title}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full border-0"
+                    />
+                  </div>
+                ) : (
+                  <video
+                    controls
+                    playsInline
+                    preload="none"
+                    className="w-full rounded-2xl shadow-lg"
+                  >
+                    <source src={post.videoUrl} type="video/mp4" />
+                  </video>
+                )}
               </div>
             )}
 
