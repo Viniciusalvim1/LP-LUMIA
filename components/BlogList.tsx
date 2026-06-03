@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { categoryColors, formatPostDate, type BlogPost, type BlogCategory } from "@/lib/blog";
 import { track } from "@/lib/analytics";
@@ -56,11 +57,12 @@ export default function BlogList({ posts, hideFilter }: { posts: BlogPost[]; hid
               {/* Capa */}
               <div className="relative aspect-[16/9] overflow-hidden" style={{ background: post.gradient }}>
                 {post.cover && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={post.cover}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 )}
                 <svg className="absolute right-4 bottom-4 w-9 h-9 text-white/15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import CTAFinalSection from "@/components/CTAFinalSection";
 import Starfield from "@/components/Starfield";
 import { getPostBySlug, getAllSlugs, getPosts, categoryColors, formatPostDate } from "@/lib/blog";
+import Image from "next/image";
 import { site } from "@/lib/site";
 
 function youtubeId(url: string): string | null {
@@ -161,11 +162,13 @@ export default async function BlogPostPage({
         >
           {post.cover && (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={post.cover}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover opacity-30"
+                alt={post.title}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover opacity-30"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-[#0d1a28]/70 to-[#0d1a28]/95" />
             </>
@@ -328,8 +331,13 @@ export default async function BlogPostPage({
                     >
                       <div className="relative h-24" style={{ background: r.gradient }}>
                         {r.cover && (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={r.cover} alt={r.title} className="absolute inset-0 w-full h-full object-cover" />
+                          <Image
+                            src={r.cover}
+                            alt={r.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, 33vw"
+                            className="object-cover"
+                          />
                         )}
                       </div>
                       <div className="p-4">
