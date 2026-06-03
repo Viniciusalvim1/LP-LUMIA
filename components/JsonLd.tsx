@@ -79,9 +79,58 @@ export default function JsonLd() {
     })),
   };
 
+  const localBusiness = {
+    "@type": ["LocalBusiness", "SoftwareApplication"],
+    "@id": `${site.url}/#local`,
+    name: "Lumia",
+    alternateName: "Lumia CRM",
+    description: "Sistema de gestão all-in-one para clínicas de estética, laser e emagrecimento. Agenda, CRM, financeiro, marketing e IA em um só lugar.",
+    url: site.url,
+    telephone: "+553799839-2329",
+    email: site.email,
+    logo: site.logo,
+    image: site.logo,
+    priceRange: "R$ 349,90/mês",
+    currenciesAccepted: "BRL",
+    paymentAccepted: "Cartão de crédito, boleto, PIX",
+    areaServed: {
+      "@type": "Country",
+      name: "Brasil",
+      "@id": "https://www.wikidata.org/wiki/Q155",
+    },
+    serviceArea: {
+      "@type": "Country",
+      name: "Brasil",
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        opens: "09:00",
+        closes: "17:00",
+      },
+    ],
+    sameAs: site.sameAs,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Planos Lumia",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "Lumia Completo",
+          description: "Agenda, CRM, vendas, financeiro, marketing e IA em um só sistema",
+          price: "349.90",
+          priceCurrency: "BRL",
+          availability: "https://schema.org/InStock",
+          url: `${site.url}/#planos`,
+        },
+      ],
+    },
+  };
+
   const graph = {
     "@context": "https://schema.org",
-    "@graph": [organization, website, software, faqPage],
+    "@graph": [organization, website, software, faqPage, localBusiness],
   };
 
   return (
