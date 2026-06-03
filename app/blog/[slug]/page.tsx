@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import CTAFinalSection from "@/components/CTAFinalSection";
 import Starfield from "@/components/Starfield";
 import { getPostBySlug, getAllSlugs, getPosts, categoryColors, formatPostDate } from "@/lib/blog";
+import { site } from "@/lib/site";
 
 export const revalidate = 300;
 export const dynamicParams = true;
@@ -26,14 +27,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Post não encontrado — Lumia" };
+  const url = `${site.url}/blog/${slug}`;
+  const coverUrl = post.cover ? `${site.url}${post.cover}` : site.logo;
   return {
     title: `${post.title} — Blog Lumia`,
     description: post.excerpt,
+    alternates: { canonical: url },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
-      images: post.cover ? [{ url: post.cover }] : undefined,
+      url,
+      siteName: site.name,
+      locale: "pt_BR",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: [{ url: coverUrl, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [coverUrl],
     },
   };
 }
@@ -52,9 +67,51 @@ export default async function BlogPostPage({
   const related = all.filter((p) => p.slug !== post.slug).slice(0, 2);
 
   const hasContent = !!post.content?.trim();
+  const postUrl = `${site.url}/blog/${post.slug}`;
+  const coverUrl = post.cover ? `${site.url}${post.cover}` : site.logo;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": postUrl,
+    headline: post.title,
+    description: post.excerpt,
+    url: postUrl,
+    datePublished: post.date,
+    dateModified: post.date,
+    inLanguage: "pt-BR",
+    image: { "@type": "ImageObject", url: coverUrl, width: 1200, height: 630 },
+    author: {
+      "@type": "Person",
+      name: post.author,
+      worksFor: { "@type": "Organization", name: site.name, url: site.url },
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      logo: { "@type": "ImageObject", url: site.logo },
+    },
+    isPartOf: { "@type": "Blog", "@id": `${site.url}/blog`, name: "Blog Lumia", url: `${site.url}/blog` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    articleSection: post.category,
+    keywords: post.title.toLowerCase().split(" ").filter(w => w.length > 4).join(", "),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Início", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${site.url}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+    ],
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
 
       {/* ── Hero do artigo ── */}
@@ -79,6 +136,16 @@ export default async function BlogPostPage({
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(76,183,148,0.10)_0%,transparent_55%)] pointer-events-none" />
 
           <div className="relative z-10 max-w-[760px] mx-auto px-5 lg:px-8">
+            {/* Breadcrumb visual */}
+            <nav aria-label="Breadcrumb" className="mb-6">
+              <ol className="flex items-center gap-1.5 text-[13px] text-white/50" style={{ fontFamily: "var(--font-display)" }}>
+                <li><a href="/" className="hover:text-white transition-colors">Início</a></li>
+                <li aria-hidden="true" className="text-white/30">›</li>
+                <li><a href="/blog" className="hover:text-white transition-colors">Blog</a></li>
+                <li aria-hidden="true" className="text-white/30">›</li>
+                <li className="text-white/80 truncate max-w-[200px] sm:max-w-xs">{post.category}</li>
+              </ol>
+            </nav>
             <a
               href="/blog"
               className="inline-flex items-center gap-2 text-[14px] text-white/60 hover:text-white transition-colors mb-7"
