@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getAllSlugs, CATEGORY_SLUG } from "@/lib/blog";
+import { getAllPostsMeta, CATEGORY_SLUG } from "@/lib/blog";
 
 export const revalidate = 3600;
 
@@ -17,10 +17,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let postRoutes: MetadataRoute.Sitemap = [];
   try {
-    const slugs = await getAllSlugs();
-    postRoutes = slugs.map((slug) => ({
+    const posts = await getAllPostsMeta();
+    postRoutes = posts.map(({ slug, publishedAt }) => ({
       url: `${SITE_URL}/blog/${slug}`,
-      lastModified: now,
+      lastModified: publishedAt,
       changeFrequency: "monthly",
       priority: 0.6,
     }));

@@ -146,6 +146,19 @@ export async function getAllSlugs(): Promise<string[]> {
   return (data ?? []).map((r) => (r as { slug: string }).slug);
 }
 
+/** Slug + data real de publicação — para o sitemap. */
+export async function getAllPostsMeta(): Promise<{ slug: string; publishedAt: Date }[]> {
+  const { data } = await getSupabase()
+    .from("posts")
+    .select("slug, published_at")
+    .eq("status", "published")
+    .order("published_at", { ascending: false });
+  return (data ?? []).map((r) => ({
+    slug: (r as { slug: string; published_at: string | null }).slug,
+    publishedAt: new Date((r as { slug: string; published_at: string | null }).published_at ?? Date.now()),
+  }));
+}
+
 export function formatPostDate(iso: string): string {
   if (!iso) return "";
   const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
