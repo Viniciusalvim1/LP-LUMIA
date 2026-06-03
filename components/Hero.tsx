@@ -148,10 +148,11 @@ function RotatingHeadline() {
 }
 
 // ── Hero ─────────────────────────────────────────────────────────
+// Apenas opacity — sem y movement para evitar CLS
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: 0.65, ease: "easeOut" } as Transition,
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { delay, duration: 0.55, ease: "easeOut" } as Transition,
 });
 
 export default function Hero() {
@@ -161,7 +162,7 @@ export default function Hero() {
       style={{ backgroundColor: "#183A51" }}
     >
       {/* Fundo */}
-      <Starfield count={150} seed={1} />
+      <Starfield count={60} seed={1} />
       <ShootingStars />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_60%,rgba(76,183,148,0.09)_0%,transparent_60%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_30%,rgba(22,115,163,0.08)_0%,transparent_55%)] pointer-events-none" />
