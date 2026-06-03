@@ -174,6 +174,7 @@ export default function FeaturesSection() {
                       loop
                       muted
                       playsInline
+                      preload="none"
                       className="absolute inset-0 w-full h-full object-cover block"
                       poster={`/videos/${beat.videoKey}-poster.jpg`}
                     >

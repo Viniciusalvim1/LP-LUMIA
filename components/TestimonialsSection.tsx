@@ -14,7 +14,7 @@ const testimonials = [
       "Antes do Lumia, eu passava 2 horas por dia só confirmando agendamentos. Hoje tudo é automático. Recuperei tempo para focar nos meus pacientes e no crescimento da clínica.",
     initials: "L",
     src: `${BLOB}/depoimentos/Depoimento%20Lumia.mp4`,
-    poster: "/images/Capa%20Essence.png",
+    poster: "/images/Capa%20Essence.jpg",
   },
   {
     name: "Depoimento 2",
@@ -23,7 +23,7 @@ const testimonials = [
       "O módulo financeiro do Lumia foi um divisor de águas. Finalmente consigo ver exatamente quanto entra, o que vai sair e qual procedimento dá mais lucro.",
     initials: "L",
     src: `${BLOB}/depoimentos/Depoimento%20Lumia%202.MOV`,
-    poster: "/images/Capa%20Meire%20Final.png",
+    poster: "/images/Capa%20Meire%20Final.jpg",
   },
   {
     name: "Depoimento 3",
@@ -32,7 +32,7 @@ const testimonials = [
       "O Sistema Lumia está ajudando nossa clínica a alcançar resultados extraordinários. Recomendo para qualquer clínica que queira crescer com organização.",
     initials: "L",
     src: `${BLOB}/depoimentos/O%20Sistema%20Lumia%20esta%CC%81%20ajudando%20cli%CC%81nicas%20de%20este%CC%81tica%20em%20todo%20o%20mundo%20a%20alcanc%CC%A7ar%20resultados%20extraor.mp4`,
-    poster: "/images/Carina.png",
+    poster: "/images/Carina.jpg",
   },
 ];
 
@@ -72,7 +72,7 @@ function VideoCard({ src, poster, name, role, quote, initials, index }: typeof t
           poster={poster}
           className="absolute inset-0 w-full h-full object-cover"
           playsInline
-          preload="metadata"
+          preload="none"
           onEnded={() => setPlaying(false)}
         />
 

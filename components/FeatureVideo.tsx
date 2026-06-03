@@ -40,7 +40,7 @@ export default function FeatureVideo({ mp4, webm, poster, label }: FeatureVideoP
         playsInline
         poster={poster}
         className="w-full h-auto block"
-        preload="metadata"
+        preload="none"
       >
         <source src={webm} type="video/webm" />
         <source src={mp4} type="video/mp4" />

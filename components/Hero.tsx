@@ -323,6 +323,7 @@ export default function Hero() {
               loop
               muted
               playsInline
+              preload="none"
               className="absolute inset-0 w-full h-full object-cover object-left-top block"
               poster="/videos/dashboard-poster.jpg"
             >
