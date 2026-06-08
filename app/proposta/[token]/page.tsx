@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getSupabase } from "@/lib/supabase";
-import Starfield from "@/components/Starfield";
 import PropostaHero from "@/components/proposta/PropostaHero";
 import PropostaCustosNaoInclusos from "@/components/proposta/PropostaCustosNaoInclusos";
 import PropostaPricing from "@/components/proposta/PropostaPricing";
+import PropostaOnboarding from "@/components/proposta/PropostaOnboarding";
+import PropostaTestimonials from "@/components/proposta/PropostaTestimonials";
+import PropostaScrollReveal from "@/components/proposta/PropostaScrollReveal";
 import FeaturesSidebar from "@/components/features/FeaturesSidebar";
 import FeatureBlock from "@/components/features/FeatureBlock";
 import { featureCategories, allFeatures } from "@/content/features";
@@ -146,8 +148,17 @@ export default async function PropostaPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* A gente implementa com você */}
+      <PropostaOnboarding />
+
+      {/* Depoimentos */}
+      <PropostaTestimonials />
+
       {/* Custos não inclusos */}
       <PropostaCustosNaoInclusos />
+
+      {/* Frase animada com scroll antes do preço */}
+      <PropostaScrollReveal />
 
       {/* Card de preço */}
       <PropostaPricing
