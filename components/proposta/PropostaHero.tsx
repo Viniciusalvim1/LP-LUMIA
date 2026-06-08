@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 interface Props {
   nomeClinica: string;
@@ -34,11 +35,11 @@ export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, 
     <>
       <section
         className="relative min-h-[90vh] w-full flex flex-col items-center justify-center p-6 overflow-hidden"
-        style={{ background: "#050714", fontFamily: "var(--font-display)" }}
+        style={{ background: "#183A51", fontFamily: "var(--font-display)" }}
       >
         {/* Glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none" style={{ background: "rgba(91,235,211,0.10)", filter: "blur(120px)" }} />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "rgba(99,102,241,0.10)", filter: "blur(100px)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none" style={{ background: "rgba(76,183,148,0.12)", filter: "blur(120px)" }} />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "rgba(22,115,163,0.12)", filter: "blur(100px)" }} />
 
         {/* Estrelas */}
         <div className="absolute inset-0 pointer-events-none opacity-60">
@@ -62,15 +63,13 @@ export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, 
           {/* Logo + badge */}
           <div className="flex flex-col items-center gap-5 mb-8">
             <div className="flex items-center gap-2">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center"
-                style={{
-                  background: "linear-gradient(135deg,#5BEBD3,#0d9488)",
-                  boxShadow: "0 0 15px rgba(91,235,211,0.4)",
-                }}
-              >
-                <div className="w-3 h-3 bg-white rounded-full" />
-              </div>
+              <Image
+                src="/LOGO LUMIA/icon-teal.png"
+                alt="Lumia"
+                width={36}
+                height={36}
+                className="rounded-xl"
+              />
               <span className="text-white font-bold text-xl tracking-tight">Lumia</span>
             </div>
 
