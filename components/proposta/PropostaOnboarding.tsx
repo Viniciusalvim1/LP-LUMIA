@@ -76,7 +76,7 @@ export default function PropostaOnboarding() {
   });
 
   return (
-    <section className="relative bg-[#183A51] py-24">
+    <section id="onboarding" className="relative bg-[#183A51] py-24">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(76,183,148,0.08)_0%,transparent_60%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1100px] mx-auto px-5 lg:px-12">

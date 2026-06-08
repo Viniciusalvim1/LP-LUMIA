@@ -69,28 +69,8 @@ export default async function PropostaPage({ params }: PageProps) {
         nomeClinica={proposta.nome_clinica}
         nomeResponsavel={proposta.nome_responsavel}
         expiresAt={proposta.expires_at}
+        observacoes={proposta.observacoes}
       />
-
-      {/* Observações personalizadas (se houver) */}
-      {proposta.observacoes && (
-        <div className="bg-[#EBF8FF] border-b border-[#BEE3F8]">
-          <div className="max-w-[860px] mx-auto px-5 lg:px-12 py-5">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-[#1673A3]/20 flex items-center justify-center shrink-0 mt-0.5">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1673A3" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <p
-                className="text-[14px] text-[#1a3a5c] leading-[1.6]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {proposta.observacoes}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Seção de funcionalidades — idêntica à /funcionalidades */}
       <div id="funcionalidades" className="bg-white">
