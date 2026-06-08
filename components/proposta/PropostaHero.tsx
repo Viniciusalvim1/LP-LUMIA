@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Starfield from "@/components/Starfield";
+import ShootingStars from "@/components/ShootingStars";
 
 interface Props {
   nomeClinica: string;
@@ -18,13 +20,6 @@ function formatDate(iso: string) {
   });
 }
 
-// Gera estrelas estáticas (seed fixo para evitar hydration mismatch)
-const STARS = Array.from({ length: 40 }, (_, i) => ({
-  w: ((i * 37) % 20) / 10 + 0.5,
-  top: ((i * 73) % 100),
-  left: ((i * 53) % 100),
-  delay: ((i * 17) % 30) / 10,
-}));
 
 export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, observacoes }: Props) {
   const [videoOpen, setVideoOpen] = useState(false);
@@ -41,22 +36,11 @@ export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none" style={{ background: "rgba(76,183,148,0.12)", filter: "blur(120px)" }} />
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "rgba(22,115,163,0.12)", filter: "blur(100px)" }} />
 
-        {/* Estrelas */}
-        <div className="absolute inset-0 pointer-events-none opacity-60">
-          {STARS.map((s, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: s.w + "px",
-                height: s.w + "px",
-                top: s.top + "%",
-                left: s.left + "%",
-                animation: `lumia-twinkle 3s ${s.delay}s ease-in-out infinite`,
-              }}
-            />
-          ))}
-        </div>
+        {/* Estrelas piscantes */}
+        <Starfield count={130} seed={42} />
+
+        {/* Estrelas cadentes */}
+        <ShootingStars />
 
         <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center text-center mt-10">
 
@@ -244,12 +228,6 @@ export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, 
           </div>
         </div>
 
-        <style>{`
-          @keyframes lumia-twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50%       { opacity: 1;   transform: scale(1.2); }
-          }
-        `}</style>
       </section>
 
       {/* Modal de vídeo */}
