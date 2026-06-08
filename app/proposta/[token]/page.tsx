@@ -166,7 +166,7 @@ export default async function PropostaPage({ params }: PageProps) {
             Lumia
           </span>
           <p className="text-[13px] text-white/35" style={{ fontFamily: "var(--font-display)" }}>
-            lumiaclin.com.br · contato@lumiaclin.com.br
+            lumiaclin.com.br · viniciusalvim@lumiacrm.com.br
           </p>
         </div>
       </footer>
