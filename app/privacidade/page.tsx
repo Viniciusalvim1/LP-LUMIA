@@ -30,6 +30,15 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    heading: "Integração com o Google Agenda",
+    body: [
+      "Se você é profissional de uma clínica cliente e optar por conectar sua conta Google na Lumia, utilizamos essa conexão exclusivamente para copiar, em um calendário secundário criado especialmente para isso (chamado \"Lumia\"), os agendamentos em que você é a profissional responsável. Essa sincronização acontece em um único sentido: do sistema Lumia para o Google Agenda.",
+      "O escopo de acesso solicitado (calendar.app.created) permite que o aplicativo crie e gerencie apenas o calendário que ele mesmo cria — não temos acesso ao seu calendário pessoal, a outros calendários da sua conta Google, nem aos compromissos que você já tinha antes de conectar. Também acessamos seu endereço de e-mail do Google, apenas para identificar qual conta está conectada.",
+      "Os dados que passam a constar nesse calendário são informações já existentes no seu cadastro na clínica: nome do cliente, procedimento agendado, horário e, quando aplicável, telefone de contato. Esses dados não são compartilhados com o Google além do necessário para exibição do evento, nem utilizados para qualquer finalidade publicitária.",
+      "Você pode revogar esse acesso a qualquer momento, diretamente na Lumia (em Configurações → Integrações → Google Agenda → Desconectar) ou pela sua Conta Google, em myaccount.google.com/permissions. Ao desconectar, os dados de conexão são apagados do nosso banco; o calendário e os eventos já criados no Google permanecem até que você os remova manualmente, salvo se optar por excluí-los no momento da desconexão.",
+    ],
+  },
+  {
     heading: "Armazenamento e segurança",
     body: [
       "Adotamos medidas técnicas e organizacionais razoáveis para proteger seus dados contra acesso não autorizado, perda ou alteração. Os dados são armazenados em servidores de provedores que seguem padrões reconhecidos de segurança.",
@@ -55,7 +64,7 @@ export default function PrivacidadePage() {
   return (
     <LegalLayout
       title="Política de Privacidade"
-      updatedAt="01 de junho de 2026"
+      updatedAt="20 de julho de 2026"
       intro="Esta Política de Privacidade descreve como a Lumia coleta, utiliza, armazena e protege as informações dos visitantes e usuários dos seus serviços. Ao utilizar nosso site, você concorda com as práticas aqui descritas."
       sections={sections}
     />
