@@ -1,0 +1,274 @@
+# Lumia Design System
+
+Documentação completa para recriar o design da landing page do Lumia CRM.
+
+---
+
+## 1. Design System
+
+### Paleta de cores
+
+| Token | Hex | Uso |
+|---|---|---|
+| Primary / Accent | `#00C9A7` | CTAs, glow, destaques, ícones ativos |
+| Secondary | `#3B82F6` | Destaques secundários, blobs, gradiente |
+| Background (Navy) | `#060F1E` | Background de toda a página |
+| Surface (Card) | `rgba(255,255,255,0.04)` | Cards, glassmorphism, painéis |
+| Border | `rgba(255,255,255,0.08)` | Bordas sutis de cards e inputs |
+| Text | `#FFFFFF` | Texto principal |
+| Text Muted | `rgba(255,255,255,0.55)` | Subtítulos, eyebrows, labels |
+
+### Gradientes
+
+```css
+/* CTA e efeitos de glow */
+background: linear-gradient(135deg, #00C9A7, #3B82F6);
+
+/* Radial glow — usado atrás de elementos hero */
+background: radial-gradient(ellipse at 50% 0%, rgba(0,201,167,0.25) 0%, transparent 70%);
+
+/* Glow escuro — transição de seção */
+background: radial-gradient(ellipse at 50% 100%, rgba(59,130,246,0.15) 0%, transparent 60%);
+```
+
+### Opacidade e variações
+
+- Hover nos botões: aumentar opacidade do glow de `0.35` → `0.5`
+- Navbar scroll: fundo de `transparent` → `rgba(6,15,30,0.7)`
+- Bordas de card: `rgba(255,255,255,0.08)` → `rgba(0,201,167,0.3)` no hover
+
+---
+
+## 2. Tipografia
+
+### Fontes utilizadas
+
+```
+Display / Títulos: Poppins (Google Fonts) — weights: 700, 800, 900
+Body / UI:         Plus Jakarta Sans (Google Fonts) — weights: 400, 500, 700, 800
+```
+
+### Escala de tamanhos
+
+| Elemento | Tamanho (desktop) | Tamanho (mobile) | Peso | Letter Spacing |
+|---|---|---|---|---|
+| Hero H1 | 80px / 5rem | 48px / 3rem | 900 | -0.03em |
+| Section H2 | 52px / 3.25rem | 36px / 2.25rem | 800 | -0.02em |
+| Feature H3 | 32px / 2rem | 24px / 1.5rem | 700 | -0.01em |
+| Body | 18–20px | 16–18px | 400 | 0 |
+| Eyebrow / Label | 13–14px | 13px | 500 | 0.08em (uppercase) |
+| CTA Button | 16px | 15px | 700 | 0.02em |
+
+### Line Height
+
+- Títulos (H1, H2): `line-height: 1.05–1.1`
+- H3: `line-height: 1.2`
+- Body: `line-height: 1.65`
+
+---
+
+## 3. Layout
+
+### Container
+
+```css
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 24px; /* mobile */
+padding: 0 48px; /* ≥ 1024px */
+```
+
+### Grid
+
+- **Features:** CSS Grid 2 colunas (`grid-cols-2`), alternando texto-vídeo / vídeo-texto.
+- **Métricas:** Grid 3 colunas (`grid-cols-3`) → 1 coluna no mobile.
+- **Navbar:** Flexbox, `justify-between`.
+
+### Seções
+
+Cada seção principal usa `min-height: 100vh` para ancoragem do scroll storytelling.
+
+### Breakpoints (Tailwind padrão)
+
+| Breakpoint | px |
+|---|---|
+| sm | 640px |
+| md | 768px |
+| lg | 1024px |
+| xl | 1280px |
+
+---
+
+## 4. Componentes
+
+### Navbar
+
+```
+Altura: 72px
+Fundo inicial: transparent
+Fundo após scroll > 40px: rgba(6, 15, 30, 0.7) + backdrop-blur(12px)
+Border-bottom após scroll: 1px solid rgba(255,255,255,0.06)
+Itens: logo (esquerda) | links nav (centro) | botão CTA (direita)
+Espaçamento entre links: 32px (gap-8)
+Transição: 300ms ease
+```
+
+### Hero Section
+
+```
+Layout: flex coluna centrado, min-height 100vh
+Badge eyebrow: pill translúcida com ícone + texto
+H1: Poppins 900, 80px, gradient-text (teal→azul)
+Subtítulo: Plus Jakarta Sans 18px, text-muted, max-width 560px
+CTAs: 2 botões lado a lado (primário + fantasma)
+Vídeo/visual: posição absoluta atrás do conteúdo ou em sticky ao lado
+Padding-top: 120px (compensa navbar)
+```
+
+### Seções de Feature (StoryBeat)
+
+```
+Layout: grid 2 colunas (texto | vídeo), alternado
+Vídeo: sticky top: 80px, rounded-2xl, border luminosa teal no hover
+Texto: flex coluna, gap 24px
+Eyebrow: uppercase, text-muted, 13px, letter-spacing 0.08em
+H3: Poppins 700, 32px, white
+Body: Jakarta 18px, text-muted, max-width 520px
+```
+
+### Seção de Caos (Scroll-Driven)
+
+```
+Fundo escuro com texto revelando word-by-word conforme scroll
+Palavras/frases: Poppins 800, 48px, opacity 0→1 scroll-linked
+Gradiente de fundo: radial-gradient vermelho/laranja sutil (estado de "dor")
+```
+
+### Métricas (Cards)
+
+```
+Grid 3 colunas
+Card: surface + border-border, border-radius 16px, padding 32px
+Número: Poppins 900, 56–64px, gradient-text
+Label: Plus Jakarta 16px, text-muted
+Sublabel: 13px, text-muted, opacity 0.7
+Animação: count-up via useInView + useSpring
+```
+
+### Botões
+
+```css
+/* Botão primário (pill) */
+border-radius: 9999px;
+padding: 14px 28px;
+background: linear-gradient(135deg, #00C9A7, #3B82F6);
+color: #060F1E;
+font-weight: 700;
+font-size: 16px;
+transition: transform 200ms, box-shadow 200ms;
+
+/* Hover */
+transform: scale(1.03);
+box-shadow: 0 0 60px rgba(0,201,167,0.5), 0 0 120px rgba(0,201,167,0.2);
+
+/* Botão fantasma */
+border: 1.5px solid rgba(255,255,255,0.2);
+background: transparent;
+color: white;
+
+/* Hover fantasma */
+border-color: #00C9A7;
+color: #00C9A7;
+```
+
+### Inputs e formulários
+
+```css
+background: rgba(255,255,255,0.04);
+border: 1px solid rgba(255,255,255,0.12);
+border-radius: 12px;
+padding: 14px 18px;
+color: white;
+font-family: var(--font-body);
+font-size: 16px;
+transition: border-color 200ms;
+
+/* Focus */
+border-color: #00C9A7;
+outline: none;
+box-shadow: 0 0 0 3px rgba(0,201,167,0.15);
+```
+
+---
+
+## 5. CSS / Tailwind equivalente
+
+### Classes utilitárias Tailwind
+
+```tsx
+// Container padrão
+<div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+
+// Botão primário
+<button className="
+  rounded-full px-7 py-3.5
+  bg-gradient-to-r from-[#00C9A7] to-[#3B82F6]
+  text-[#060F1E] font-bold text-base
+  transition-all duration-200
+  hover:scale-[1.03] hover:shadow-[0_0_60px_rgba(0,201,167,0.5)]
+">
+
+// Card surface
+<div className="
+  bg-white/[0.04] border border-white/[0.08]
+  rounded-2xl backdrop-blur-md
+">
+
+// Eyebrow label
+<span className="
+  text-[13px] font-medium tracking-[0.08em] uppercase
+  text-white/55
+">
+
+// Gradient text
+<h2 className="gradient-text font-display font-black">
+
+// Seção com glow radial atrás
+<section className="relative overflow-hidden">
+  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,201,167,0.2)_0%,transparent_70%)]" />
+```
+
+---
+
+## 6. Tokens de Design (CSS Variables)
+
+```css
+:root {
+  --primary:    #00C9A7;
+  --secondary:  #3B82F6;
+  --background: #060F1E;
+  --surface:    rgba(255, 255, 255, 0.04);
+  --border:     rgba(255, 255, 255, 0.08);
+  --text:       #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.55);
+
+  /* Gradients */
+  --gradient-cta:  linear-gradient(135deg, #00C9A7, #3B82F6);
+  --gradient-hero: radial-gradient(ellipse at 50% 0%, rgba(0,201,167,0.25) 0%, transparent 70%);
+  --gradient-blue: radial-gradient(ellipse at 50% 100%, rgba(59,130,246,0.15) 0%, transparent 60%);
+
+  /* Glow */
+  --glow-sm:  0 0 40px rgba(0, 201, 167, 0.35), 0 0 80px rgba(0, 201, 167, 0.15);
+  --glow-md:  0 0 60px rgba(0, 201, 167, 0.5), 0 0 120px rgba(0, 201, 167, 0.2);
+
+  /* Typography */
+  --font-display: "Poppins", sans-serif;
+  --font-body:    "Plus Jakarta Sans", sans-serif;
+
+  /* Sizing */
+  --container-max: 1200px;
+  --nav-height: 72px;
+  --radius-pill: 9999px;
+  --radius-card: 16px;
+}
+```

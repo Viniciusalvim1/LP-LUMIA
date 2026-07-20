@@ -5,6 +5,8 @@ import { site } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Script from "next/script";
 
+const GTM_ID = "GTM-KX3X5W3S";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -58,14 +60,14 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: site.url,
     siteName: "Lumia",
-    images: [{ url: "/LOGO LUMIA/16.png", width: 1080, height: 1080, alt: "Lumia" }],
+    images: [{ url: "/opengraph-image.png", width: 1731, height: 909, alt: "Lumia" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lumia — Sistema de gestão para clínicas de estética",
     description:
       "O CRM all-in-one para clínicas de estética, laser e emagrecimento. Agenda, vendas, financeiro, marketing e IA em um só lugar.",
-    images: ["/LOGO LUMIA/16.png"],
+    images: ["/twitter-image.png"],
   },
   robots: {
     index: true,
@@ -89,17 +91,26 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${montserrat.variable} ${questrial.variable}`}>
       <head>
+        <Script id="google-tag-manager" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`}
+        </Script>
         <JsonLd />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
-      {/* GA4 com lazyOnload — carrega só quando o browser está ocioso */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-KSJZK2TP3R"
-        strategy="lazyOnload"
-      />
-      <Script id="ga4-init" strategy="lazyOnload">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KSJZK2TP3R',{send_page_view:true});`}
-      </Script>
+      <body className="min-h-full flex flex-col">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

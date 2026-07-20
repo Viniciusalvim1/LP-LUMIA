@@ -74,7 +74,7 @@ export default function AboutSection() {
               className="btn-primary inline-block mt-8 text-[15px] px-8 py-3.5"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Fale com um Especialista
+              Começar trial gratuito →
             </a>
           </motion.div>
 

@@ -17,6 +17,7 @@ const footerLinks = [
     title: "Empresa",
     links: [
       { label: "Sobre Nós", href: "/#sobre" },
+      { label: "Afiliados", href: "/afiliados" },
       { label: "Blog", href: "/blog" },
     ],
   },

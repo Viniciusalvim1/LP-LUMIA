@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────
-// Helper de tracking do GA4 (gtag via @next/third-parties).
+// Helper de tracking via dataLayer do Google Tag Manager.
 // Uso: track("trial_click", { location: "hero" })
 // ─────────────────────────────────────────────────────────────
 
-type GtagWindow = Window & {
-  gtag?: (...args: unknown[]) => void;
+type GTMWindow = Window & {
+  dataLayer?: Array<Record<string, unknown>>;
 };
 
 export type AnalyticsEvent =
@@ -25,7 +25,7 @@ export function track(
   params: Record<string, string | number | boolean> = {}
 ) {
   if (typeof window === "undefined") return;
-  const w = window as GtagWindow;
-  if (typeof w.gtag !== "function") return;
-  w.gtag("event", event, params);
+  const w = window as GTMWindow;
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push({ ...params, event });
 }

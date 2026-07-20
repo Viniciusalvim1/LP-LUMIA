@@ -37,9 +37,10 @@ function Word({
 // ── Plano ────────────────────────────────────────────────────────
 const PLAN = {
   name: "Lumia Completo",
+  pricePrefix: "A partir de",
   price: "349,90",
   period: "/mês",
-  note: "por unidade · sem fidelidade",
+  note: "Trial gratuito de 7 dias · Sem fidelidade · Cancele quando quiser",
   features: [
     "Agenda, CRM, vendas e financeiro",
     "Atendimento com assinatura digital",
@@ -65,7 +66,7 @@ function PlanCard() {
             className="inline-block bg-[#4CB794]/20 text-[#4CB794] text-[13px] font-medium px-4 py-1.5 rounded-full mb-6"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Plano único
+            Planos a partir de R$ 349,90
           </span>
 
           <h3
@@ -75,7 +76,11 @@ function PlanCard() {
             {PLAN.name}
           </h3>
 
-          <div className="flex items-end justify-center gap-1 mb-1">
+          <span className="text-[14px] text-white/50 mb-1" style={{ fontFamily: "var(--font-display)" }}>
+            {PLAN.pricePrefix}
+          </span>
+
+          <div className="flex items-end justify-center gap-1 mb-2">
             <span className="text-[20px] text-white/60 mb-2" style={{ fontFamily: "var(--font-display)" }}>R$</span>
             <span
               className="text-[56px] font-bold leading-none"
@@ -91,7 +96,7 @@ function PlanCard() {
             </span>
             <span className="text-[18px] text-white/60 mb-2" style={{ fontFamily: "var(--font-display)" }}>{PLAN.period}</span>
           </div>
-          <p className="text-[13px] text-white/40 mb-7" style={{ fontFamily: "var(--font-display)" }}>{PLAN.note}</p>
+          <p className="text-[13px] text-white/45 mb-7 leading-relaxed" style={{ fontFamily: "var(--font-display)" }}>{PLAN.note}</p>
 
           <ul className="flex flex-col gap-3 w-full mb-8 text-left">
             {PLAN.features.map((f) => (

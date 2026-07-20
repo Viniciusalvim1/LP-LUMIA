@@ -111,6 +111,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Pacotes padronizados agilizam a venda — em vez de selecionar cada procedimento individualmente, o atendente escolhe o pacote e todos os itens já entram com as quantidades certas. O preço sugerido serve de referência, mas pode ser ajustado na venda.",
+        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/animac%CC%A7ao%20criac%CC%A7ao%20de%20pacotes.mp4",
       },
     ],
   },
@@ -188,6 +189,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Contratos físicos somem, não têm validade jurídica robusta e exigem impressora. Com a Lumia, o contrato é gerado automaticamente com os dados da venda, enviado por link e assinado digitalmente com validade legal.",
+        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/Animac%CC%A7ao%20Contrato.mov",
       },
     ],
   },
@@ -222,7 +224,7 @@ export const featureCategories: FeatureCategory[] = [
           "Protocolos de tratamento com dosagem e evolução",
         ],
         videoKey: "contatos",
-        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/crm%20animac%CC%A7a%CC%83o.mp4",
+        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/Animac%CC%A7a%CC%83o%20contatos.mov",
       },
       {
         id: "fichas",
@@ -241,6 +243,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Anamneses em papel são perdidas e difíceis de consultar. Com a Lumia, o histórico clínico está no perfil digital, acessível por qualquer profissional autorizado antes do atendimento. Templates reutilizáveis evitam recriar formulários toda vez.",
+        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/Animac%CC%A7a%CC%83o%20Fichas.mov",
       },
     ],
   },

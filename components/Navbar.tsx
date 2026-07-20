@@ -134,8 +134,10 @@ export default function Navbar() {
 
           {/* CTA */}
           <a
-            href="/#cta"
-            onClick={() => track("cta_click", { label: "Demonstração", location: "navbar" })}
+            href="https://app.lumiaclin.com.br/#signup"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("trial_click", { location: "navbar" })}
             className="ml-2 text-[13px] font-semibold px-5 py-2 rounded-full cursor-pointer transition-all duration-200"
             style={{
               fontFamily: "var(--font-display)",
@@ -146,7 +148,7 @@ export default function Navbar() {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#3da882"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#4CB794"; }}
           >
-            Demonstração
+            Começar grátis
           </a>
         </div>
       </motion.header>
@@ -242,8 +244,10 @@ export default function Navbar() {
               ))}
               <div className="p-4">
                 <a
-                  href="/#cta"
-                  onClick={() => { track("cta_click", { label: "Demonstração", location: "navbar-mobile" }); setMenuOpen(false); }}
+                  href="https://app.lumiaclin.com.br/#signup"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => { track("trial_click", { location: "navbar-mobile" }); setMenuOpen(false); }}
                   className="block w-full text-center text-[14px] font-semibold py-3 rounded-full cursor-pointer"
                   style={{
                     fontFamily: "var(--font-display)",
@@ -251,7 +255,7 @@ export default function Navbar() {
                     color: "#fff",
                   }}
                 >
-                  Agendar Demonstração
+                  Começar trial gratuito
                 </a>
               </div>
             </motion.div>

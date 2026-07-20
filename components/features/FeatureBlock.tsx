@@ -83,7 +83,16 @@ export default function FeatureBlock({ feature }: Props) {
                   poster={feature.videoUrl ? undefined : `/videos/${feature.videoKey}-poster.jpg`}
                 >
                   {feature.videoUrl ? (
-                    <source src={feature.videoUrl} type="video/mp4" />
+                    <source
+                      src={feature.videoUrl}
+                      type={
+                        /\.mov(\?|$)/i.test(feature.videoUrl)
+                          ? "video/quicktime"
+                          : /\.webm(\?|$)/i.test(feature.videoUrl)
+                          ? "video/webm"
+                          : "video/mp4"
+                      }
+                    />
                   ) : (
                     <>
                       <source src={`/videos/${feature.videoKey}.webm`} type="video/webm" />

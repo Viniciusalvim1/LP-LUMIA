@@ -66,12 +66,12 @@ export default function CTAFinalSection() {
               className="text-[17px] leading-[1.7] text-white/70 mb-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Agende uma demonstração gratuita e veja como o Lumia pode eliminar o caos da sua operação em menos de 30 dias.
+              Crie sua conta e comece o trial gratuito de 7 dias. Em 2 horas sua clínica está rodando no Lumia — sem cartão de crédito, sem fidelidade.
             </p>
 
             <ul className="flex flex-col gap-4">
               {[
-                "Demonstração personalizada para sua clínica",
+                "Trial gratuito de 7 dias",
                 "Sem necessidade de cartão de crédito",
                 "Suporte completo na implantação",
                 "Resultados visíveis no primeiro mês",
@@ -103,7 +103,7 @@ export default function CTAFinalSection() {
                 className="text-[20px] font-semibold text-[#183A51] mb-6 text-center"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Fale com um Especialista
+                Criar minha conta grátis
               </h3>
 
               {submitted ? (
@@ -169,7 +169,7 @@ export default function CTAFinalSection() {
                     className="btn-primary text-[16px] font-semibold py-4 mt-1 w-full disabled:opacity-60 disabled:cursor-not-allowed"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
-                    {sending ? "Enviando..." : "Agendar Demonstração"}
+                    {sending ? "Enviando..." : "Começar trial gratuito →"}
                   </button>
                   {error && (
                     <p className="text-center text-red-500 text-[13px]" style={{ fontFamily: "var(--font-display)" }}>
