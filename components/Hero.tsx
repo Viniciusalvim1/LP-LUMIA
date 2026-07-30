@@ -224,7 +224,7 @@ export default function Hero() {
               </a>
 
               <a
-                href="https://api.whatsapp.com/send/?phone=5531995671853&text=Quero%20saber%20mais%20sobre%20o%20sistema%20lumia&type=phone_number&app_absent=0"
+                href="https://api.whatsapp.com/send/?phone=5531983165920&text=Quero%20saber%20mais%20sobre%20o%20sistema%20lumia&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track("whatsapp_click", { location: "hero" })}

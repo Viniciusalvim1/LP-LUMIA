@@ -185,7 +185,7 @@ export default function PropostaPricing({
 
               {/* Falar com consultor */}
               <a
-                href="https://wa.me/5531995671853?text=Ol%C3%A1!%20Tenho%20interesse%20na%20proposta%20do%20Lumia."
+                href="https://wa.me/5531983165920?text=Ol%C3%A1!%20Tenho%20interesse%20na%20proposta%20do%20Lumia."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 flex items-center justify-center gap-2 text-[13px] text-white/50 hover:text-white/80 transition-colors duration-200"

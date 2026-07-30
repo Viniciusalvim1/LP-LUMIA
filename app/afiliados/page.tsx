@@ -5,7 +5,7 @@ import Starfield from "@/components/Starfield";
 import { site } from "@/lib/site";
 
 const WHATSAPP_URL =
-  "https://wa.me/5531995671853?text=Ol%C3%A1%21%20Quero%20participar%20do%20Programa%20de%20Afiliados%20Lumia.";
+  "https://wa.me/5531983165920?text=Ol%C3%A1%21%20Quero%20participar%20do%20Programa%20de%20Afiliados%20Lumia.";
 
 const platformCapabilities = [
   "Organizar a agenda dos profissionais",

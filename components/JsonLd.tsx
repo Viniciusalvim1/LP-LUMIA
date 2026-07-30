@@ -86,7 +86,7 @@ export default function JsonLd() {
     alternateName: "Lumia CRM",
     description: "Sistema de gestão all-in-one para clínicas de estética, laser e emagrecimento. Agenda, CRM, financeiro, marketing e IA em um só lugar.",
     url: site.url,
-    telephone: "+553799839-2329",
+    telephone: "+5531983165920",
     email: site.email,
     logo: site.logo,
     image: site.logo,
