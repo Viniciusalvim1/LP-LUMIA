@@ -44,7 +44,12 @@ export default function ClientLogos() {
                   width={logo.w}
                   height={logo.h}
                   className="object-contain"
-                  style={{ maxHeight: logo.h }}
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    maxWidth: logo.w,
+                    maxHeight: logo.h,
+                  }}
                 />
               </div>
             ))}
