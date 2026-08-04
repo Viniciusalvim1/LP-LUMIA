@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 
 const integrations = [
-  { name: "Supabase",     desc: "Banco de dados, autenticação, armazenamento e real-time" },
-  { name: "Assinafy",     desc: "Assinatura digital de contratos com validade jurídica" },
+  { name: "Meta Ads",     desc: "Leads dos anúncios do Facebook e Instagram direto no funil" },
   { name: "WhatsApp",     desc: "Automações e comunicações via Z-API / Meta" },
+  { name: "Assinafy",     desc: "Assinatura digital de contratos com validade jurídica" },
+  { name: "Supabase",     desc: "Banco de dados, autenticação, armazenamento e real-time" },
   { name: "Google Sheets", desc: "Exportação de dados para planilhas" },
   { name: "Webhooks",     desc: "Integração com sistemas externos via HTTP POST" },
 ];

@@ -26,13 +26,13 @@ const testimonials = [
     poster: "/images/Carina.jpg",
   },
   {
-    name: "Meire Chavez",
-    role: "Clínica parceira Lumia",
+    name: "Rafael",
+    role: "Parceiro Lumia",
     quote:
       "Eu recomendo o sistema Lumia para quem deseja melhorar seus resultados",
-    initials: "M",
-    src: `${BLOB}/depoimentos/Depoimento%20Lumia%202.MOV`,
-    poster: "/images/Capa%20Meire%20Final.jpg",
+    initials: "R",
+    src: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/depoimentos/0717%281%29.mp4",
+    poster: "/images/Imagem%20capa%20rafael.png",
   },
 ];
 

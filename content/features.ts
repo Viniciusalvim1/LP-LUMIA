@@ -23,6 +23,36 @@ export const featureCategories: FeatureCategory[] = [
     label: "Operação",
     features: [
       {
+        id: "cadastro",
+        name: "Configuração Inicial",
+        tagline: "A clínica pronta para operar, sem precisar de suporte técnico.",
+        description:
+          "Assistente de configuração inicial que guia o cadastro dos dados da clínica, serviços, profissionais e horários no primeiro acesso à Lumia.",
+        canDo: [
+          "Cadastrar os dados da clínica (nome, endereço, contato)",
+          "Cadastrar profissionais, serviços e horários de funcionamento",
+          "Seguir um passo a passo guiado até a clínica ficar pronta para o primeiro agendamento",
+        ],
+        whyMatters:
+          "A maioria dos sistemas entrega uma tela vazia e um manual de 40 páginas. Na Lumia, o próprio produto guia a configuração inicial — a clínica sai do zero para operando sem depender de um técnico ao lado.",
+        videoKey: "cadastro",
+      },
+      {
+        id: "painel",
+        name: "Painel Operacional",
+        tagline: "O dia da clínica inteiro em uma tela, sempre atualizado.",
+        description:
+          "Painel com a lista de atendimentos e vendas recentes, atualizado em tempo real conforme a equipe usa o sistema.",
+        canDo: [
+          "Ver os últimos atendimentos e vendas registrados, com cliente, procedimento, sala e valor",
+          "Acessar rapidamente a assinatura ou o contrato de cada atendimento",
+          "Acompanhar o movimento da clínica sem abrir relatório nenhum",
+        ],
+        whyMatters:
+          "Dá pra sentir o pulso da clínica batendo o olho numa tela só — sem esperar o fechamento do mês pra saber se o dia foi bom.",
+        videoKey: "geral",
+      },
+      {
         id: "agenda",
         name: "Agenda",
         tagline: "Agendamento completo para clínicas com múltiplos profissionais.",
@@ -71,8 +101,23 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Elimina o papel e garante validade jurídica. O cliente assina na hora, o contrato fica arquivado digitalmente e o profissional não gerencia arquivos físicos. Se o atendimento vier agendado, os dados do cliente e do procedimento já vêm pré-preenchidos.",
-        videoKey: "contatos",
-        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/crm%20animac%CC%A7a%CC%83o.mp4",
+        videoKey: "contrato",
+      },
+      {
+        id: "escutaativa",
+        name: "Escuta Ativa Lumia",
+        tagline: "Grava a consulta, transcreve e gera o relatório sozinha.",
+        description:
+          "IA que grava o áudio da consulta direto no perfil do paciente, transcreve em tempo real e gera um relatório da conversa — sem ninguém digitar nada durante o atendimento.",
+        canDo: [
+          "Iniciar a gravação com um clique, direto na aba Consultas do perfil do paciente",
+          "Ver a transcrição em tempo real enquanto a consulta acontece",
+          "Consultar o histórico completo de consultas gravadas, com duração e responsável",
+          "Gerar relatório da consulta a partir da transcrição, com um clique",
+        ],
+        whyMatters:
+          "Anotar durante a consulta tira atenção do paciente, e depois ninguém lembra os detalhes exatos do que foi combinado. Com a Lumia ouvindo e transcrevendo, o profissional conversa livre — e o relatório sai pronto sozinho.",
+        videoKey: "consulta",
       },
       {
         id: "estoque",
@@ -94,7 +139,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Sem controle de estoque, a clínica fica sem insumos no meio do atendimento ou compra mais do que precisa. A Lumia conecta o que foi usado em cada atendimento com o saldo de estoque, sem lançamento manual.",
-        videoKey: "relatorios",
+        videoKey: "estoque",
       },
       {
         id: "pacotes",
@@ -111,7 +156,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Pacotes padronizados agilizam a venda — em vez de selecionar cada procedimento individualmente, o atendente escolhe o pacote e todos os itens já entram com as quantidades certas. O preço sugerido serve de referência, mas pode ser ajustado na venda.",
-        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/animac%CC%A7ao%20criac%CC%A7ao%20de%20pacotes.mp4",
+        videoKey: "pacotes",
       },
     ],
   },
@@ -146,7 +191,39 @@ export const featureCategories: FeatureCategory[] = [
           "Origens das oportunidades para análise de canal",
           "Data de última interação para identificar leads frios",
         ],
-        videoKey: "vendas",
+        videoKey: "crm",
+      },
+      {
+        id: "checkpoints",
+        name: "Etapas do Funil",
+        tagline: "Cada funil com as etapas do jeito que a sua clínica vende.",
+        description:
+          "Editor de etapas (checkpoints) do funil: crie, nomeie, coloria e reordene as fases do pipeline comercial, com IA disponível em qualquer etapa.",
+        canDo: [
+          "Criar múltiplos funis para processos diferentes (ex.: Comercial, Captação Instagram)",
+          "Adicionar, renomear e reordenar etapas livremente",
+          "Definir o tipo de cada etapa: em andamento, venda ganha ou venda perdida",
+          "Ativar IA em uma etapa específica para qualificar ou responder automaticamente",
+        ],
+        whyMatters:
+          "Cada clínica fecha venda de um jeito — funil engessado força a operação a se adaptar ao sistema. Na Lumia é o contrário: você desenha as etapas do seu processo comercial, e o funil segue o seu fluxo.",
+        videoKey: "funil",
+      },
+      {
+        id: "conversas",
+        name: "Conversas",
+        tagline: "O WhatsApp de cada lead, dentro da própria oportunidade.",
+        description:
+          "Caixa de entrada unificada que conecta o WhatsApp da clínica a cada oportunidade do funil, sem precisar sair do CRM para responder.",
+        canDo: [
+          "Ver e responder a conversa de WhatsApp dentro do card da oportunidade",
+          "Acompanhar a linha do tempo completa: notas, mudanças de etapa e mensagens no mesmo lugar",
+          "Ver a caixa de entrada com todas as conversas ativas em um painel único",
+          "Identificar de qual origem (Google Ads, Instagram, indicação) veio cada conversa",
+        ],
+        whyMatters:
+          "Sem isso, o atendente responde no celular pessoal ou no WhatsApp Web, e a conversa não fica ligada à oportunidade nem visível para o resto da equipe. Com o CRM e o WhatsApp no mesmo lugar, qualquer pessoa assume a conversa com o histórico completo à vista.",
+        videoKey: "crm",
       },
       {
         id: "vendas",
@@ -172,7 +249,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "O profissional não anota na planilha, não cria sessões na mão nem lembra de gerar o contrato — a Lumia faz tudo ao finalizar a venda. O dashboard mostra em tempo real quanto a clínica vendeu e qual é a tendência.",
-        videoKey: "financeiro",
+        videoKey: "vendas",
       },
       {
         id: "contratos",
@@ -189,7 +266,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Contratos físicos somem, não têm validade jurídica robusta e exigem impressora. Com a Lumia, o contrato é gerado automaticamente com os dados da venda, enviado por link e assinado digitalmente com validade legal.",
-        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/Animac%CC%A7ao%20Contrato.mov",
+        videoKey: "contrato",
       },
     ],
   },
@@ -224,7 +301,6 @@ export const featureCategories: FeatureCategory[] = [
           "Protocolos de tratamento com dosagem e evolução",
         ],
         videoKey: "contatos",
-        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/Animac%CC%A7a%CC%83o%20contatos.mov",
       },
       {
         id: "fichas",
@@ -243,7 +319,7 @@ export const featureCategories: FeatureCategory[] = [
         ],
         whyMatters:
           "Anamneses em papel são perdidas e difíceis de consultar. Com a Lumia, o histórico clínico está no perfil digital, acessível por qualquer profissional autorizado antes do atendimento. Templates reutilizáveis evitam recriar formulários toda vez.",
-        videoUrl: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/Animac%CC%A7a%CC%83o%20Fichas.mov",
+        videoKey: "fichas",
       },
     ],
   },
@@ -314,6 +390,21 @@ export const featureCategories: FeatureCategory[] = [
         whyMatters:
           "Comunicação manual não escala. Com automações, a clínica confirma agendamentos, parabeniza clientes, coleta NPS e avisa sobre pacotes perto do vencimento — tudo sem intervenção humana. O sistema evita duplicatas (cada cliente recebe cada mensagem uma única vez por evento).",
         videoKey: "marketing",
+      },
+      {
+        id: "integracoes",
+        name: "Integração com Meta Ads",
+        tagline: "Lead do anúncio do Facebook e Instagram direto no funil.",
+        description:
+          "Conexão com a Página do Facebook para capturar automaticamente os leads gerados por anúncios de formulário (lead ads) no Facebook e Instagram.",
+        canDo: [
+          "Conectar a Página do Facebook da clínica em poucos passos",
+          "Escolher em qual funil e etapa cada formulário de anúncio deve entrar",
+          "Ver os leads chegando no CRM assim que preenchem o formulário do anúncio",
+        ],
+        whyMatters:
+          "Sem integração, o lead do anúncio fica preso no gerenciador de anúncios ou numa planilha exportada manualmente — e esfria antes de alguém ver. Conectado, o lead vira oportunidade no funil no mesmo instante em que o formulário é enviado.",
+        videoKey: "integracao",
       },
     ],
   },

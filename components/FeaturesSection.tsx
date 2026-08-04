@@ -12,6 +12,7 @@ const TAB_LABELS: Record<string, string> = {
   vendas:     "Funil de Vendas",
   financeiro: "Financeiro",
   marketing:  "Marketing",
+  estoque:    "Estoque",
   relatorios: "Relatórios",
 };
 
@@ -23,6 +24,7 @@ const FEATURE_ANCHOR: Record<string, string> = {
   vendas:     "funil",
   financeiro: "financeiro",
   marketing:  "marketing",
+  estoque:    "estoque",
   relatorios: "relatorios",
 };
 
@@ -34,6 +36,7 @@ const GRADIENTS: Record<string, string> = {
   vendas:     "linear-gradient(135deg, #1a1a0a 0%, #3a3a18 45%, #5a5a1a 100%)",
   financeiro: "linear-gradient(135deg, #0a1e1a 0%, #183A34 45%, #1a6a5a 100%)",
   marketing:  "linear-gradient(135deg, #1a0a1a 0%, #3a1834 45%, #6a1a5a 100%)",
+  estoque:    "linear-gradient(135deg, #0a1e2a 0%, #183A51 45%, #2a7a8a 100%)",
   relatorios: "linear-gradient(135deg, #0a1a2e 0%, #183A51 50%, #2a6a9a 100%)",
 };
 

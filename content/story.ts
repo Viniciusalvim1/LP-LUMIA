@@ -70,6 +70,14 @@ export const storyBeats: StoryBeatData[] = [
     flip: true,
   },
   {
+    id: "estoque",
+    eyebrow: "Insumo que acaba no meio do atendimento",
+    headline: "Controle de estoque que avisa antes de faltar.",
+    body: "Toxina, preenchedor, agulha e anestésico com quantidade, mínimo e alerta de reposição. Cada insumo usado no atendimento baixa sozinho do saldo — sem lançamento manual.",
+    videoKey: "estoque",
+    flip: false,
+  },
+  {
     id: "relatorios",
     eyebrow: "Decisões no achismo",
     headline: "Relatórios que mostram onde sua clínica realmente está.",

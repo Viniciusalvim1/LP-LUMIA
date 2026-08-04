@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Assets-fonte locais (não deployar — fora de public/)
+.local-assets/

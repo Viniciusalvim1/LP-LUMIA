@@ -27,7 +27,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: "Quanto custa o Lumia?",
-    a: "O Lumia começa em R$ 349,90 por mês por unidade, com todos os módulos incluídos e sem fidelidade. Você pode começar com um trial gratuito de 7 dias, sem cartão de crédito, e cancelar quando quiser.",
+    a: "O Lumia começa em R$ 349,90 por mês por unidade, com todos os módulos incluídos e sem fidelidade. Você pode começar com um trial gratuito de 14 dias, sem cartão de crédito, e cancelar quando quiser.",
   },
   {
     q: "Há fidelidade contratual ou posso cancelar quando quiser?",

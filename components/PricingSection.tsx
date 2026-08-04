@@ -40,7 +40,7 @@ const PLAN = {
   pricePrefix: "A partir de",
   price: "349,90",
   period: "/mês",
-  note: "Trial gratuito de 7 dias · Sem fidelidade · Cancele quando quiser",
+  note: "Trial gratuito de 14 dias · Sem fidelidade · Cancele quando quiser",
   features: [
     "Agenda, CRM, vendas e financeiro",
     "Atendimento com assinatura digital",

@@ -66,12 +66,12 @@ export default function CTAFinalSection() {
               className="text-[17px] leading-[1.7] text-white/70 mb-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Crie sua conta e comece o trial gratuito de 7 dias. Em 2 horas sua clínica está rodando no Lumia — sem cartão de crédito, sem fidelidade.
+              Crie sua conta e comece o trial gratuito de 14 dias. Em 2 horas sua clínica está rodando no Lumia — sem cartão de crédito, sem fidelidade.
             </p>
 
             <ul className="flex flex-col gap-4">
               {[
-                "Trial gratuito de 7 dias",
+                "Trial gratuito de 14 dias",
                 "Sem necessidade de cartão de crédito",
                 "Suporte completo na implantação",
                 "Resultados visíveis no primeiro mês",

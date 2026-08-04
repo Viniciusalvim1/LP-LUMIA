@@ -13,10 +13,10 @@ const testimonials = [
     poster: "/images/Capa%20Essence.jpg",
   },
   {
-    name: "Clínica parceira Lumia",
-    quote: "O módulo financeiro do Lumia foi um divisor de águas. Finalmente consigo ver exatamente quanto entra, o que vai sair e qual procedimento dá mais lucro.",
-    src: `${BLOB}/depoimentos/Depoimento%20Lumia%202.MOV`,
-    poster: "/images/Capa%20Meire%20Final.jpg",
+    name: "Rafael",
+    quote: "Eu recomendo o sistema Lumia para quem deseja melhorar seus resultados",
+    src: "https://p5baoahwu1dipoiy.public.blob.vercel-storage.com/depoimentos/0717%281%29.mp4",
+    poster: "/images/Imagem%20capa%20rafael.png",
   },
   {
     name: "Clínica parceira Lumia",
