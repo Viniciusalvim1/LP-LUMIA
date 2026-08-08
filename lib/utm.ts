@@ -17,6 +17,10 @@ const FORWARDED_PARAMS = [
   "fbclid",
   "ttclid",
   "msclkid",
+  // Click id do ChatGPT Ads. O pixel da OpenAI grava um cookie
+  // first-party a partir dele; repassar na URL garante a atribuição
+  // mesmo que o cookie não atravesse para o subdomínio do app.
+  "oppref",
 ];
 
 /**

@@ -3,6 +3,7 @@ import { Montserrat, Questrial } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import OpenAIPixel from "@/components/OpenAIPixel";
 import { GoogleTagManager } from "@next/third-parties/google";
 
 const GTM_ID = "GTM-KX3X5W3S";
@@ -90,6 +91,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={`${montserrat.variable} ${questrial.variable}`}>
+      <OpenAIPixel />
       <GoogleTagManager gtmId={GTM_ID} />
       <body className="min-h-full flex flex-col">
         <JsonLd />
