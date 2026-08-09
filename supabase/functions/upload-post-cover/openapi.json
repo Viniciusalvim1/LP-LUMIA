@@ -1,0 +1,73 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Capa de post do blog Lumia",
+    "description": "Persiste a capa de um post no Supabase Storage e atualiza cover_url/cover_alt na tabela posts.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "https://zjjlnwyssucyloagqpqc.supabase.co/functions/v1" }
+  ],
+  "paths": {
+    "/upload-post-cover": {
+      "post": {
+        "operationId": "uploadPostCover",
+        "summary": "Sobe a capa de um post e atualiza o registro no banco",
+        "description": "Chame depois de criar o post e gerar a imagem da capa. Informe o slug do post já existente e a URL pública da imagem gerada; a função baixa a imagem, guarda no Storage e grava a URL final em posts.cover_url. Reenviar a mesma imagem é seguro: a resposta volta com reused=true e nada é duplicado.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["slug", "image_url"],
+                "properties": {
+                  "slug": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]{3,120}$",
+                    "description": "Slug do post que já existe na tabela posts. Só letras minúsculas, números e hífen."
+                  },
+                  "image_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL https da imagem gerada. O host precisa estar na allowlist da função, senão a chamada é recusada."
+                  },
+                  "alt_text": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "description": "Texto alternativo descrevendo a capa, para acessibilidade e SEO. Texto puro, sem HTML."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Capa persistida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "slug": { "type": "string" },
+                    "cover_url": { "type": "string" },
+                    "reused": {
+                      "type": "boolean",
+                      "description": "true quando essa imagem já estava no Storage e o upload foi pulado."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Payload inválido, imagem recusada ou host fora da allowlist" },
+          "401": { "description": "Token ausente ou incorreto" },
+          "404": { "description": "Não existe post com esse slug" },
+          "503": { "description": "Função sem BLOG_UPLOAD_TOKEN configurado" }
+        }
+      }
+    }
+  }
+}
