@@ -32,6 +32,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# exceto o exemplo — é ele que documenta quais variáveis a LP precisa
+# (inclusive os DOIS projetos Supabase). Não contém segredo.
+!.env.local.example
 
 # vercel
 .vercel

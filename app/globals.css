@@ -440,7 +440,9 @@ body {
 .cta-button {
   display: inline-block;
   background: #4CB794;
-  color: white;
+  /* !important porque `.blog-post a` (0,1,1) tem especificidade maior
+     que `.cta-button` (0,1,0) — sem isso o texto sai azul no botão verde */
+  color: white !important;
   padding: 13px 26px;
   border-radius: 999px;
   font-weight: 700;
@@ -501,4 +503,45 @@ body {
   margin: 12px 0 4px;
   font-size: 16px;
   color: #3a4754;
+}
+
+/* Tabela comparativa — o wrapper rola sozinho no mobile para a
+   página nunca ganhar scroll horizontal */
+.blog-post .table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-post table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 640px;
+  font-size: 15px;
+}
+
+.blog-post thead th {
+  background: #f4f8fb;
+  color: #183A51;
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 2px solid #e2ebf2;
+  white-space: nowrap;
+}
+
+.blog-post tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef2f6;
+  color: #3a4754;
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+.blog-post tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-post tbody tr:nth-child(odd) td {
+  background: rgba(76, 183, 148, 0.04);
 }

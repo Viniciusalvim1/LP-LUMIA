@@ -1,4 +1,4 @@
-import { getSupabase } from "./supabase";
+import { getBlogSupabase } from "./supabase";
 
 // ─────────────────────────────────────────────────────────────
 // Blog Lumia — leitura dos posts publicados no Supabase
@@ -65,7 +65,7 @@ function mapRow(row: PostRow): BlogPost {
 
 /** Posts publicados, mais recentes primeiro. `limit` opcional. */
 export async function getPosts(limit?: number): Promise<BlogPost[]> {
-  let query = getSupabase()
+  let query = getBlogSupabase()
     .from("posts")
     .select("slug, title, excerpt, category, read_minutes, published_at, cover_url, author_name, video_url")
     .eq("status", "published")
@@ -87,7 +87,7 @@ export interface BlogPostFull extends BlogPost {
 
 /** Post único (publicado) por slug, com o corpo (content). */
 export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> {
-  const { data, error } = await getSupabase()
+  const { data, error } = await getBlogSupabase()
     .from("posts")
     .select("slug, title, excerpt, content, category, read_minutes, published_at, cover_url, author_name, video_url")
     .eq("status", "published")
@@ -123,7 +123,7 @@ export const CATEGORY_DESCRIPTION: Record<BlogCategory, string> = {
 
 /** Posts de uma categoria específica. */
 export async function getPostsByCategory(category: BlogCategory): Promise<BlogPost[]> {
-  const { data, error } = await getSupabase()
+  const { data, error } = await getBlogSupabase()
     .from("posts")
     .select("slug, title, excerpt, category, read_minutes, published_at, cover_url, author_name, video_url")
     .eq("status", "published")
@@ -139,7 +139,7 @@ export async function getPostsByCategory(category: BlogCategory): Promise<BlogPo
 
 /** Slugs de todos os posts publicados — para generateStaticParams. */
 export async function getAllSlugs(): Promise<string[]> {
-  const { data } = await getSupabase()
+  const { data } = await getBlogSupabase()
     .from("posts")
     .select("slug")
     .eq("status", "published");
@@ -148,7 +148,7 @@ export async function getAllSlugs(): Promise<string[]> {
 
 /** Slug + data real de publicação — para o sitemap. */
 export async function getAllPostsMeta(): Promise<{ slug: string; publishedAt: Date }[]> {
-  const { data } = await getSupabase()
+  const { data } = await getBlogSupabase()
     .from("posts")
     .select("slug, published_at")
     .eq("status", "published")

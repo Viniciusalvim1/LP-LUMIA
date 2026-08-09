@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Starfield from "./Starfield";
-import { getSupabase } from "@/lib/supabase";
+import { getBlogSupabase } from "@/lib/supabase";
 import { track } from "@/lib/analytics";
 
 export default function CTAFinalSection() {
@@ -17,7 +17,7 @@ export default function CTAFinalSection() {
     setSending(true);
     setError(null);
 
-    const { error } = await getSupabase().from("leads").insert({
+    const { error } = await getBlogSupabase().from("leads").insert({
       nome: form.nome,
       sobrenome: form.sobrenome || null,
       email: form.email,
