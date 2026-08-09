@@ -183,7 +183,6 @@ insert into public.posts (
       <thead>
         <tr>
           <th>Sistema</th>
-          <th>Preço de entrada</th>
           <th>Teste grátis</th>
           <th>Foco principal</th>
           <th>Melhor para</th>
@@ -192,35 +191,30 @@ insert into public.posts (
       <tbody>
         <tr>
           <td><strong>Lumia</strong></td>
-          <td>R$ 349,90/mês</td>
           <td>14 dias, sem cartão</td>
           <td>Clínica de estética, laser e emagrecimento</td>
           <td>Clínicas que querem toda a operação em um sistema só</td>
         </tr>
         <tr>
           <td><strong>Belle Software</strong></td>
-          <td>Sob consulta</td>
           <td>Sim</td>
           <td>Clínica de estética</td>
           <td>Clínicas com muitos profissionais, salas e equipamentos</td>
         </tr>
         <tr>
           <td><strong>Trinks</strong></td>
-          <td>A partir de R$ 89/mês</td>
           <td>Sim</td>
           <td>Beleza (salões, barbearias, spas)</td>
           <td>Salões com estética complementar e captação via marketplace</td>
         </tr>
         <tr>
           <td><strong>Clinicorp</strong></td>
-          <td>A partir de R$ 149,90/mês</td>
           <td>Sim</td>
           <td>Odontologia e estética</td>
           <td>Redes, franquias e clínicas com odonto + estética</td>
         </tr>
         <tr>
           <td><strong>Simples Agenda</strong></td>
-          <td>A partir de R$ 39,90/mês</td>
           <td>35 dias, sem cartão</td>
           <td>ERP multissegmento</td>
           <td>Autônomas e clínicas pequenas saindo da planilha</td>
@@ -229,7 +223,7 @@ insert into public.posts (
     </table>
   </div>
 
-  <p>Valores de referência coletados em agosto de 2026 nos sites oficiais dos fabricantes. Confirme as condições vigentes com cada fornecedor.</p>
+  <p>Informações coletadas em agosto de 2026 nos sites oficiais dos fabricantes. Confirme as condições vigentes com cada fornecedor.</p>
 </section>
 
 <section id="como-escolher">
