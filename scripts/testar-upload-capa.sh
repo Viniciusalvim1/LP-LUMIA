@@ -13,7 +13,10 @@ IMG="$RAIZ/public/images/blog/$SLUG.png"
 
 [ -f "$IMG" ] || { echo "imagem não encontrada: $IMG"; exit 1; }
 
-read -rs -p "Cole o BLOG_UPLOAD_TOKEN: " TOKEN
+# Prompt via printf em vez de `read -p`: em zsh, -p significa "ler de
+# coprocesso" e falha com "no coprocess". Assim funciona nos dois shells.
+printf 'Cole o BLOG_UPLOAD_TOKEN: '
+read -rs TOKEN
 echo
 [ -n "$TOKEN" ] || { echo "token vazio"; exit 1; }
 
