@@ -1,9 +1,9 @@
 project_id = "zjjlnwyssucyloagqpqc"
 
-# O chamador é um agente externo autenticando por secret key no header
-# `apikey`. A checagem de plataforma (verify_jwt) só aceita JWT de usuário
-# do Supabase Auth — que não existe neste fluxo —, então ela rejeitaria a
-# requisição antes de chegar no handler. A validação da credencial passa a
-# ser feita pelo `auth: "secret:blog-agent"` dentro da função.
+# O chamador é um agente externo autenticando por token próprio no header
+# x-blog-upload-token. A checagem de plataforma (verify_jwt) só aceita JWT
+# de usuário do Supabase Auth — que não existe neste fluxo —, então ela
+# rejeitaria a requisição antes de chegar no handler. A validação passa a
+# ser feita pelo BLOG_UPLOAD_TOKEN dentro da função.
 [functions.upload-post-cover]
 verify_jwt = false

@@ -2,7 +2,17 @@
 // upload-post-cover — persiste a capa de um post no Storage
 //
 // Contrato (JSON, nunca multipart — o chamador é um agente):
-//   POST  apikey: sb_secret_...   (chave nomeada "blog-agent")
+//   POST  x-blog-upload-token: <BLOG_UPLOAD_TOKEN>
+//
+// Por que um token próprio e NÃO uma secret key do Supabase: secret key
+// mapeia para o role `service_role`, que tem acesso total ao projeto e
+// BYPASSRLS. Entregá-la ao agente daria a ele poder de ler `leads` e
+// apagar tabelas — a função não estreitaria nada. Este token não
+// significa nada para o Supabase; só esta função o reconhece. Se vazar,
+// o dano máximo é uma capa trocada.
+//
+// A credencial administrativa fica no ambiente da função (ctx.supabaseAdmin)
+// e nunca sai daqui.
 //
 //   Rota preferencial — bytes direto, sem depender de URL externa:
 //   { "slug": "...", "image_base64": "...", "mime_type": "image/png", "alt_text": "..." }
@@ -21,8 +31,10 @@
 // estilo visual não exige redeploy.
 //
 // Requer no config.toml:  verify_jwt = false
-// (o chamador autentica por secret key no header `apikey`, e a checagem
-// de plataforma só aceita JWT de usuário — que não existe neste fluxo)
+// (a checagem de plataforma só aceita JWT de usuário, que não existe
+// neste fluxo). `auth: "none"` desliga também a checagem de credencial
+// do SDK — a autenticação passa a ser inteiramente do token, mesmo
+// padrão que a documentação usa para webhook assinado.
 // ─────────────────────────────────────────────────────────────
 import { withSupabase } from "npm:@supabase/server";
 
@@ -67,6 +79,24 @@ function limparAlt(texto: string): string {
 
 function erro(mensagem: string, status: number) {
   return Response.json({ success: false, error: mensagem }, { status });
+}
+
+/**
+ * Compara em tempo constante, via digest: `a !== b` sai no primeiro byte
+ * diferente, e esse tempo é medível. Comparar os hashes também evita
+ * vazar o comprimento do token.
+ */
+async function tokenConfere(recebido: string, esperado: string): Promise<boolean> {
+  const cod = new TextEncoder();
+  const [a, b] = await Promise.all([
+    crypto.subtle.digest("SHA-256", cod.encode(recebido)),
+    crypto.subtle.digest("SHA-256", cod.encode(esperado)),
+  ]);
+  const x = new Uint8Array(a);
+  const y = new Uint8Array(b);
+  let diferenca = 0;
+  for (let i = 0; i < x.length; i++) diferenca |= x[i] ^ y[i];
+  return diferenca === 0;
 }
 
 /** Baixa a imagem de uma origem autorizada, validando antes e depois. */
@@ -117,8 +147,19 @@ async function hashCurto(bytes: Uint8Array): Promise<string> {
 }
 
 export default {
-  fetch: withSupabase({ auth: "secret:blog-agent" }, async (req: Request, ctx) => {
+  fetch: withSupabase({ auth: "none" }, async (req: Request, ctx) => {
     if (req.method !== "POST") return erro("use POST", 405);
+
+    // Falha fechada: sem o segredo configurado, a função não atende
+    // ninguém — em vez de virar endpoint aberto por esquecimento.
+    const esperado = Deno.env.get("BLOG_UPLOAD_TOKEN") ?? "";
+    if (esperado.length < 32) {
+      return erro("função não configurada", 503);
+    }
+    const recebido = req.headers.get("x-blog-upload-token") ?? "";
+    if (!recebido || !(await tokenConfere(recebido, esperado))) {
+      return erro("não autorizado", 401);
+    }
 
     let corpo: Record<string, unknown>;
     try {
