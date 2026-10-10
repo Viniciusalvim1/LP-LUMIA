@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalLayout, { type LegalSection } from "@/components/LegalLayout";
+import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Termos de Uso",
@@ -40,6 +41,40 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    heading: "Lumia Checkout (pagamentos)",
+    body: [
+      "O Lumia Checkout é uma funcionalidade da Lumia que permite à clínica cobrar seus pacientes por Pix, boleto e cartão: parcelas das vendas registradas no sistema, compras de pacotes e agendamentos pagos feitos pelo paciente na área do cliente e planos mensais com cobrança recorrente no cartão.",
+      "Para usar o Lumia Checkout, a clínica tem uma conta de pagamento própria no Asaas, aberta em seu nome. Os valores pagos pelos pacientes são recebidos e mantidos nessa conta, sob responsabilidade do Asaas. A Lumia não recebe, não guarda e não movimenta os valores da clínica.",
+    ],
+  },
+  {
+    heading: "Prestação de Serviços Financeiros",
+    body: [
+      "Os serviços financeiros e de pagamentos disponibilizados por meio da presente plataforma, incluindo abertura e manutenção de conta de pagamento, processamento de transações, emissão de boletos, transferências, pagamentos e demais movimentações de valores, são prestados pelo ASAAS GESTÃO FINANCEIRA INSTITUIÇÃO DE PAGAMENTOS S.A., instituição de pagamento autorizada a funcionar pelo Banco Central do Brasil.",
+      `A ${company.legalName} atua exclusivamente como integradora tecnológica e distribuidora da experiência do produto, não sendo instituição financeira ou de pagamento, nem realizando intermediação financeira em nome próprio.`,
+      "O cliente declara ciência de que o relacionamento financeiro / de pagamentos e a responsabilidade regulatória pelos serviços acima descritos são do ASAAS GESTÃO FINANCEIRA S.A., nos termos da regulamentação vigente.",
+    ],
+  },
+  {
+    heading: "Remuneração de uso da plataforma",
+    body: [
+      "Pelo uso da plataforma, a Lumia recebe uma remuneração de uso da plataforma sobre as cobranças pagas por boleto e cartão, descontada automaticamente na liquidação. Cobranças pagas por Pix não têm remuneração de uso da plataforma. A remuneração não se confunde com as tarifas dos serviços financeiros, que são do Asaas. Se uma cobrança for estornada, a remuneração correspondente também é estornada.",
+    ],
+  },
+  {
+    heading: "Vendas da clínica aos pacientes",
+    body: [
+      "Nas vendas feitas pela área do cliente e nos planos mensais, a clínica é a vendedora: define preços, pacotes, planos e regras, responde pela prestação dos serviços e pelo atendimento ao paciente, inclusive pedidos de cancelamento e de devolução previstos no Código de Defesa do Consumidor.",
+      "Os planos mensais não têm fidelidade: o paciente pode cancelar a qualquer momento pela área do cliente ou com a clínica, e as cobranças seguintes deixam de ser feitas. O que já foi pago continua valendo pelo prazo do plano.",
+    ],
+  },
+  {
+    heading: "Atendimento sobre pagamentos",
+    body: [
+      "Dúvidas e reclamações sobre os serviços financeiros podem ser feitas diretamente ao Asaas, pelo telefone 0800 009 0037 ou pelo e-mail contato@asaas.com.br. Reclamações recebidas pela Lumia sobre esses serviços serão encaminhadas ao Asaas.",
+    ],
+  },
+  {
     heading: "Propriedade intelectual",
     body: [
       "Todo o conteúdo, marca, layout e software da Lumia são protegidos por direitos de propriedade intelectual e não podem ser copiados, reproduzidos ou utilizados sem autorização prévia.",
@@ -69,7 +104,7 @@ export default function TermosPage() {
   return (
     <LegalLayout
       title="Termos de Uso"
-      updatedAt="01 de junho de 2026"
+      updatedAt="10 de outubro de 2026"
       intro="Estes Termos de Uso estabelecem as condições gerais para a utilização do site e dos serviços oferecidos pela Lumia. Leia com atenção antes de utilizar a plataforma."
       sections={sections}
     />
