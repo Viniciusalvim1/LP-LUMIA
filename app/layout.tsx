@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import OpenAIPixel from "@/components/OpenAIPixel";
+import RefAfiliado from "@/components/RefAfiliado";
 import { GoogleTagManager } from "@next/third-parties/google";
 
 const GTM_ID = "GTM-KX3X5W3S";
@@ -95,6 +96,7 @@ export default function RootLayout({
       <GoogleTagManager gtmId={GTM_ID} />
       <body className="min-h-full flex flex-col">
         <JsonLd />
+        <RefAfiliado />
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}

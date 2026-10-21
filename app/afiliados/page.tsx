@@ -6,6 +6,9 @@ import { site } from "@/lib/site";
 
 const WHATSAPP_URL =
   "https://wa.me/5531983165920?text=Ol%C3%A1%21%20Quero%20participar%20do%20Programa%20de%20Afiliados%20Lumia.";
+// Cadastro, indicações, materiais e comissões ficam no portal do parceiro (app).
+const PORTAL_URL = "https://app.lumiaclin.com.br/parceiro";
+const REGULAMENTO_URL = "https://app.lumiaclin.com.br/afiliados/regulamento.html";
 
 const platformCapabilities = [
   "Organizar a agenda dos profissionais",
@@ -121,9 +124,9 @@ const affiliateSteps = [
   },
   {
     step: "3",
-    title: "Você recebe pela indicação fechada",
+    title: "Você recebe quando a clínica paga",
     description:
-      "Se a clínica fechar com a Lumia, você recebe R$ 349,90 por aquela indicação.",
+      "Escolha como ganhar em cada indicação: a 1ª mensalidade de uma vez ou cerca de R$ 50 por mês enquanto a clínica for cliente.",
   },
 ] as const;
 
@@ -137,14 +140,14 @@ const opportunityPoints = [
 export const metadata: Metadata = {
   title: "Programa de Afiliados",
   description:
-    "Indique clínicas para a Lumia e receba R$ 349,90 por indicação fechada. Veja como funciona o programa de afiliados.",
+    "Indique clínicas para a Lumia e escolha como ganhar: a 1ª mensalidade de uma vez ou cerca de R$ 50 por mês, por clínica, enquanto ela for cliente.",
   alternates: {
     canonical: "/afiliados",
   },
   openGraph: {
     title: "Programa de Afiliados Lumia",
     description:
-      "Indique clínicas para a Lumia. Se fechar, você recebe R$ 349,90 por indicação fechada.",
+      "Indique clínicas para a Lumia e ganhe a 1ª mensalidade ou uma renda mensal por clínica.",
     url: `${site.url}/afiliados`,
     type: "website",
   },
@@ -152,7 +155,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Programa de Afiliados Lumia",
     description:
-      "Indique clínicas para a Lumia e receba R$ 349,90 por indicação fechada.",
+      "Indique clínicas para a Lumia e ganhe a 1ª mensalidade ou uma renda mensal por clínica.",
   },
 };
 
@@ -215,26 +218,24 @@ export default function AfiliadosPage() {
                 className="text-[36px] sm:text-[46px] md:text-[58px] font-bold leading-[1.06] tracking-[-0.03em] text-white"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Indique clínicas para a Lumia e receba{" "}
-                <span className="headline-highlight">R$ 349,90 por contrato fechado</span>
+                Indique clínicas para a Lumia e{" "}
+                <span className="headline-highlight">ganhe de uma vez ou todo mês</span>
               </h1>
 
               <p
                 className="text-[17px] md:text-[19px] leading-[1.8] text-white/72 mt-6 max-w-[680px]"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Você conecta a Lumia com clínicas que precisam organizar melhor a operação. Nosso time apresenta o sistema, faz a demonstração e conduz a negociação.
+                Você conecta a Lumia com clínicas que precisam organizar melhor a operação. Nosso time apresenta o sistema, faz a demonstração e conduz a negociação. Você acompanha cada indicação e cada comissão no seu portal de parceiro.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mt-9">
                 <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={PORTAL_URL}
                   className="inline-flex items-center justify-center rounded-full px-7 py-4 text-[15px] font-semibold text-white bg-[#4CB794] hover:bg-[#3da882] transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  Quero participar do programa
+                  Quero ser parceiro
                 </a>
                 <a
                   href="#como-funciona"
@@ -255,7 +256,8 @@ export default function AfiliadosPage() {
               </p>
               <div className="mt-5 space-y-5">
                 {[
-                  ["Indicação fechada", "R$ 349,90 para você"],
+                  ["Ganho imediato", "A 1ª mensalidade: R$ 349,90 no plano completo"],
+                  ["Ganho recorrente", "Cerca de R$ 50 por mês, por clínica, sem limite de meses"],
                   ["Sua função", "Indicar clínicas qualificadas"],
                   ["Nossa função", "Apresentar, vender, implantar e dar suporte"],
                 ].map(([label, value]) => (
@@ -464,24 +466,30 @@ export default function AfiliadosPage() {
               className="text-[32px] md:text-[44px] font-semibold leading-[1.12] text-white mt-5"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Indicação fechada = R$ 349,90 para você
+              Você escolhe: R$ 349,90 de uma vez ou cerca de R$ 50 todo mês
             </h2>
             <p
               className="text-[17px] leading-[1.8] text-white/70 mt-5 max-w-[720px] mx-auto"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Quanto mais clínicas qualificadas você indicar, maior pode ser seu ganho. Se você já conversa com donos, gestores ou times comerciais de clínicas, essa é uma oferta simples de apresentar.
+              No ganho recorrente, 10 clínicas pagando rendem cerca de R$ 500 por mês, enquanto elas forem clientes. A partir da 7ª mensalidade, o recorrente rende mais que o imediato. Valores de referência para a mensalidade de R$ 349,90; a comissão acompanha o valor que a clínica efetivamente paga.
             </p>
 
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={PORTAL_URL}
               className="inline-flex items-center justify-center rounded-full px-8 py-4 text-[15px] font-semibold text-white bg-[#4CB794] hover:bg-[#3da882] transition-colors mt-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Falar no WhatsApp para entrar no programa
+              Fazer meu cadastro de parceiro
             </a>
+            <p
+              className="text-[14px] text-white/60 mt-5"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              <a href={REGULAMENTO_URL} className="underline hover:text-white">Ler o regulamento</a>
+              {" · "}
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Tirar dúvidas no WhatsApp</a>
+            </p>
           </div>
         </div>
       </section>
