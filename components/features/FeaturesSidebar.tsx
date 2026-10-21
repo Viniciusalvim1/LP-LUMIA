@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { featureCategories } from "@/content/features";
+import { featureCategories as todasCategorias, type FeatureCategory } from "@/content/features";
 import { featureIcons } from "./featureIcons";
 
-export default function FeaturesSidebar() {
+export default function FeaturesSidebar({ categorias }: { categorias?: FeatureCategory[] } = {}) {
+  const featureCategories = categorias ?? todasCategorias;
   const [active, setActive] = useState(featureCategories[0].features[0].id);
   const mobileRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 

@@ -10,6 +10,7 @@ interface Props {
   nomeResponsavel?: string | null;
   expiresAt: string;
   observacoes?: string | null;
+  planoCodigo?: string | null;
 }
 
 function formatDate(iso: string) {
@@ -21,7 +22,7 @@ function formatDate(iso: string) {
 }
 
 
-export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, observacoes }: Props) {
+export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, observacoes, planoCodigo }: Props) {
   const [videoOpen, setVideoOpen] = useState(false);
   const validade = formatDate(expiresAt);
   const primeiroNome = nomeResponsavel?.split(" ")[0] ?? null;
@@ -127,7 +128,7 @@ export default function PropostaHero({ nomeClinica, nomeResponsavel, expiresAt, 
                     Olá{primeiroNome ? `, ${primeiroNome}` : ""}. Preparamos esta proposta exclusiva para a <strong className="text-white">{nomeClinica}</strong>.
                   </p>
                   <p>
-                    Veja abaixo a apresentação completa do sistema — agenda, vendas, CRM, WhatsApp e automações — e a proposta de investimento que preparamos para vocês.
+                    Veja abaixo a apresentação completa do sistema — {planoCodigo === "crm_149" ? "funil de vendas, WhatsApp, vendas e automações" : "agenda, vendas, CRM, WhatsApp e automações"} — e a proposta de investimento que preparamos para vocês.
                   </p>
                 </>
               ) : (

@@ -412,3 +412,17 @@ export const featureCategories: FeatureCategory[] = [
 
 // Lista achatada — útil para iterar
 export const allFeatures = featureCategories.flatMap((c) => c.features);
+
+// Plano Lumia CRM (crm_149) — só o comercial. Espelha planos.modulos no app
+// (CRM + Conversas, Marketing, Vendas, Contatos, Relatórios). Proposta desse
+// plano mostra só estas funcionalidades, para não prometer agenda/financeiro.
+export const FEATURES_PLANO_CRM = new Set([
+  "funil", "checkpoints", "conversas", "vendas", "relatorios", "marketing", "integracoes",
+]);
+
+export function categoriasDoPlano(planoCodigo?: string | null): FeatureCategory[] {
+  if (planoCodigo !== "crm_149") return featureCategories;
+  return featureCategories
+    .map((c) => ({ ...c, features: c.features.filter((f) => FEATURES_PLANO_CRM.has(f.id)) }))
+    .filter((c) => c.features.length > 0);
+}

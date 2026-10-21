@@ -9,7 +9,19 @@ interface Props {
   mesesGratis: number;
   trialDias: number;
   token: string;
+  planoCodigo?: string | null;
+  refAfiliado?: string | null;
 }
+
+// Plano Lumia CRM: só o comercial (ver FEATURES_PLANO_CRM em content/features.ts).
+const FEATURES_CRM = [
+  "Funil de vendas (CRM) com etapas",
+  "Conversas do WhatsApp integradas",
+  "Vendas e catálogo de serviços",
+  "Marketing e automações de WhatsApp",
+  "Relatórios comerciais",
+  "Suporte humano todos os dias",
+];
 
 const FEATURES = [
   "Agenda, CRM, vendas e financeiro",
@@ -31,7 +43,15 @@ export default function PropostaPricing({
   mesesGratis,
   trialDias,
   token,
+  planoCodigo,
+  refAfiliado,
 }: Props) {
+  const itens = planoCodigo === "crm_149" ? FEATURES_CRM : FEATURES;
+  // Cadastro já com o plano da proposta e o código do parceiro que a gerou.
+  const qs = new URLSearchParams();
+  if (planoCodigo) qs.set("plano", planoCodigo);
+  if (refAfiliado) qs.set("ref", refAfiliado);
+  const signupUrl = `https://app.lumiaclin.com.br/#signup${qs.toString() ? `?${qs}` : ""}`;
   const [accepting, setAccepting] = useState(false);
   const [accepted, setAccepted] = useState(false);
 
@@ -50,7 +70,7 @@ export default function PropostaPricing({
       await supabase.rpc("aceitar_proposta", { p_token: token });
       setAccepted(true);
       setTimeout(() => {
-        window.location.href = "https://app.lumiaclin.com.br/#signup";
+        window.location.href = signupUrl;
       }, 1500);
     } catch {
       setAccepting(false);
@@ -140,7 +160,7 @@ export default function PropostaPricing({
               </p>
 
               <ul className="flex flex-col gap-3 w-full mb-8 text-left">
-                {FEATURES.map((f) => (
+                {itens.map((f) => (
                   <li key={f} className="flex items-start gap-2.5">
                     <span className="mt-0.5 w-5 h-5 rounded-full bg-[#4CB794] flex items-center justify-center shrink-0">
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

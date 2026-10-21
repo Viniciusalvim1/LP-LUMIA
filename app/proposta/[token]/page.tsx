@@ -9,7 +9,7 @@ import PropostaTestimonials from "@/components/proposta/PropostaTestimonials";
 import PropostaScrollReveal from "@/components/proposta/PropostaScrollReveal";
 import FeaturesSidebar from "@/components/features/FeaturesSidebar";
 import FeatureBlock from "@/components/features/FeatureBlock";
-import { featureCategories, allFeatures } from "@/content/features";
+import { allFeatures, categoriasDoPlano } from "@/content/features";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +38,8 @@ async function getProposta(token: string) {
     observacoes: string | null;
     expires_at: string;
     aceita_em: string | null;
+    ref_afiliado: string | null;
+    plano_codigo: string | null;
   };
 }
 
@@ -61,12 +63,14 @@ export default async function PropostaPage({ params }: PageProps) {
   if (!proposta) {
     notFound();
   }
+  const featureCategories = categoriasDoPlano(proposta.plano_codigo);
 
   return (
     <div className="min-h-screen">
       {/* Hero personalizado */}
       <PropostaHero
         nomeClinica={proposta.nome_clinica}
+        planoCodigo={proposta.plano_codigo}
         nomeResponsavel={proposta.nome_responsavel}
         expiresAt={proposta.expires_at}
         observacoes={proposta.observacoes}
@@ -94,12 +98,14 @@ export default async function PropostaPage({ params }: PageProps) {
               className="text-[16px] text-[#69727D] leading-[1.7] mt-3"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Da captação do lead ao pós-atendimento — agenda, vendas, financeiro, clientes e automações em um só sistema.
+              {proposta.plano_codigo === "crm_149"
+                ? "Do primeiro contato do lead à venda fechada — funil, WhatsApp, vendas e automações em um só sistema."
+                : "Da captação do lead ao pós-atendimento — agenda, vendas, financeiro, clientes e automações em um só sistema."}
             </p>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 xl:gap-16">
-            <FeaturesSidebar />
+            <FeaturesSidebar categorias={featureCategories} />
 
             <div className="flex-1 min-w-0 max-w-[860px]">
               {featureCategories.map((cat) => (
@@ -148,6 +154,8 @@ export default async function PropostaPage({ params }: PageProps) {
         mesesGratis={proposta.meses_gratis}
         trialDias={proposta.trial_dias}
         token={proposta.token}
+        planoCodigo={proposta.plano_codigo}
+        refAfiliado={proposta.ref_afiliado}
       />
 
       {/* Rodapé mínimo */}
