@@ -4,16 +4,16 @@ import { site } from "@/lib/site";
 /**
  * Funcionalidades para o portal do parceiro (app.lumiaclin.com.br/parceiro).
  * Fonte única: content/features.ts — editar aqui atualiza a LP, a proposta e o portal.
- * Vídeos com URL absoluta (Blob em produção, /videos na falta dele).
+ * Vídeos com URL absoluta em /videos — o mesmo caminho que a página /funcionalidades
+ * usa (FeatureBlock). NEXT_PUBLIC_BLOB_BASE_URL aponta para um Blob sem os arquivos (404).
  */
 export const dynamic = "force-static";
 
-const BLOB = process.env.NEXT_PUBLIC_BLOB_BASE_URL ?? "";
 
 function video(key?: string, url?: string) {
   if (url) return { mp4: url, webm: null, poster: null };
   if (!key) return null;
-  const base = BLOB || `${site.url.replace(/\/$/, "")}/videos`;
+  const base = `${site.url.replace(/\/$/, "")}/videos`;
   return { mp4: `${base}/${key}.mp4`, webm: `${base}/${key}.webm`, poster: `${base}/${key}-poster.jpg` };
 }
 
