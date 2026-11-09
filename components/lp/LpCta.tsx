@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { track } from "@/lib/analytics";
 import { withCampaignParams } from "@/lib/utm";
 
 const SIGNUP_URL = "https://app.lumiaclin.com.br/#signup";
@@ -71,7 +70,7 @@ export default function LpCta({
       href={SIGNUP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => track("trial_click", { location })}
+      data-local={location}
       className={`inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 cursor-pointer hover:brightness-110 hover:-translate-y-px ${
         SIZES[size]
       } ${full ? "w-full" : ""} ${className}`}

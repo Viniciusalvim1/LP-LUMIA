@@ -10,7 +10,6 @@ import {
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
-import { track } from "@/lib/analytics";
 import { withCampaignParams } from "@/lib/utm";
 
 const SIGNUP_URL = "https://app.lumiaclin.com.br/#signup";
@@ -291,7 +290,7 @@ export default function Navbar({
               href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => track("trial_click", { location: "navbar" })}
+              data-local="navbar"
               className="ml-2 cursor-pointer whitespace-nowrap rounded-full px-5 py-2 text-[13px] font-semibold transition-all duration-200"
               style={{
                 fontFamily: "var(--font-display)",
@@ -466,7 +465,8 @@ export default function Navbar({
                   href={SIGNUP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => { track("trial_click", { location: "navbar-mobile" }); setMenuOpen(false); }}
+                  data-local="navbar-mobile"
+                  onClick={() => setMenuOpen(false)}
                   className="block w-full text-center text-[14px] font-semibold py-3 rounded-full cursor-pointer"
                   style={{
                     fontFamily: "var(--font-display)",

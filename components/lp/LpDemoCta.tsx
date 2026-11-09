@@ -1,6 +1,5 @@
 "use client";
 
-import { track } from "@/lib/analytics";
 
 // Caminho secundário: clínica maior, com equipe e sistema instalado,
 // muitas vezes prefere conversar antes de começar o trial sozinha.
@@ -25,7 +24,7 @@ export default function LpDemoCta({ location, onDark = false, className = "" }: 
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => track("whatsapp_click", { location, intent: "demo" })}
+      data-local={location}
       className={`inline-flex items-center justify-center gap-2 text-[15px] font-semibold px-7 py-4 rounded-[10px] transition-all duration-200 cursor-pointer hover:-translate-y-px ${className}`}
       style={{
         fontFamily: "var(--font-display)",
