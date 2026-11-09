@@ -26,6 +26,7 @@ const sections: LegalSection[] = [
     heading: "Cookies e tecnologias semelhantes",
     body: [
       "Usamos cookies e ferramentas de análise (como o Google Analytics) para entender como os visitantes utilizam o site e aprimorar nossos conteúdos e funcionalidades.",
+      "Também fazemos uma medição própria e anônima das páginas visitadas e dos cliques em \"criar conta\" e no WhatsApp, com um código aleatório guardado em cookie, para saber por qual canal (anúncio, busca, redes sociais, parceiros) o visitante chegou. Essa medição não guarda nome, e-mail nem endereço IP.",
       "Você pode gerenciar ou desativar cookies nas configurações do seu navegador, ciente de que isso pode afetar algumas funcionalidades do site.",
     ],
   },
