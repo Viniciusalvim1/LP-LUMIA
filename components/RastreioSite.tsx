@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { track } from "@/lib/analytics";
 
 /**
  * Rastreio de canais (painel "Canais" do Lumia HQ).
@@ -174,8 +175,13 @@ export default function RastreioSite() {
             ? "cta_whatsapp"
             : null;
         if (!tipo) return;
-        const rotulo = (a.getAttribute("data-local") || a.textContent || "").trim().slice(0, 60) || null;
+        const local = a.getAttribute("data-local");
+        const rotulo = (local || a.textContent || "").trim().slice(0, 60) || null;
         enviar(tipo, location.pathname, rotulo, sessao(null));
+        // Google e Meta (via GTM) recebem o clique de QUALQUER botão de cadastro
+        // ou WhatsApp, não só dos que chamavam track() por conta própria.
+        const onde = local || (a.closest("footer") ? "rodape" : a.closest("nav, header") ? "menu" : location.pathname);
+        track(tipo === "cta_cadastro" ? "trial_click" : "whatsapp_click", { location: onde.slice(0, 60) });
       } catch {
         /* nada */
       }

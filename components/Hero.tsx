@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, type Transition } from "framer-motion";
 import Starfield from "./Starfield";
 import ShootingStars from "./ShootingStars";
-import { track } from "@/lib/analytics";
 
 // ── Frases com segmentos destacados ──────────────────────────────
 type Seg = { text: string; h: boolean };
@@ -201,7 +200,7 @@ export default function Hero() {
                 href="https://app.lumiaclin.com.br/#signup"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track("trial_click", { location: "hero" })}
+                data-local="hero"
                 className="inline-flex items-center justify-center text-[15px] font-semibold px-7 py-4 rounded-[8px] transition-all duration-200 cursor-pointer"
                 style={{
                   fontFamily: "var(--font-display)",
@@ -227,7 +226,7 @@ export default function Hero() {
                 href="https://api.whatsapp.com/send/?phone=5531983165920&text=Quero%20saber%20mais%20sobre%20o%20sistema%20lumia&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track("whatsapp_click", { location: "hero" })}
+                data-local="hero"
                 className="inline-flex items-center gap-2 text-[14px] underline underline-offset-4 transition-colors duration-200 cursor-pointer"
                 style={{
                   fontFamily: "var(--font-display)",

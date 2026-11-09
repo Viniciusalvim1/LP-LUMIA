@@ -115,7 +115,7 @@ function PlanCard() {
             href="https://app.lumiaclin.com.br/#signup"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => track("trial_click", { location: "planos" })}
+            data-local="planos"
             className="w-full text-center text-[15px] font-semibold py-4 rounded-[10px] cursor-pointer transition-all duration-200"
             style={{ fontFamily: "var(--font-display)", background: "#4CB794", color: "#fff", boxShadow: "0 4px 20px rgba(76,183,148,0.4)" }}
           >
