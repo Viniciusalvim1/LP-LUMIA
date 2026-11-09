@@ -7,7 +7,7 @@
 const WHATSAPP_URL =
   "https://api.whatsapp.com/send/?phone=5531983165920&text=" +
   encodeURIComponent(
-    "Olá! Quero ver uma demonstração da Lumia para a minha clínica."
+    "Olá! Vim pelo site e quero ver uma demonstração da Lumia para a minha clínica."
   ) +
   "&type=phone_number&app_absent=0";
 
